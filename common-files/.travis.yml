@@ -15,7 +15,8 @@ branches:
 
 # no need for extra dependencies outside the normal build cycle with maven
 install: true
-script: "./.travis.sh"
+# make sure .travis.sh is executable (Win/Linux issues)
+script: "chmod +x .travis.sh && ./.travis.sh"
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 - mvn site

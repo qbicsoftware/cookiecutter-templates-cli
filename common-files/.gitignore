@@ -15,8 +15,4 @@
 .DS_Store
  
 # Maven
-log/
 target/
-
-# Misc
-bin/
