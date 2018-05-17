@@ -1,9 +1,0 @@
-{
-    "author": "Winnie the Pooh",
-    "email": "winnie.pooh@qbic.uni-tuebingen.de",
-    "artifact_id": "honey-portlet",
-    "display_name": "Honey Portlet",
-    "version": "0.0.1-SNAPSHOT",
-    "short_description": "Simple 'Hello World' QBiC Vaadin portlet running on Liferay.",
-    "copyright_holder": "QBiC"
-}

@@ -39,9 +39,9 @@ import life.qbic.portal.Styles.NotificationType;
 @Theme("mytheme")
 @SuppressWarnings("serial")
 @Widgetset("life.qbic.portlet.AppWidgetSet")
-public class {{ cookiecutter.main_ui }} extends QBiCPortletUI {
+public class {{ cookiecutter.entry_point }} extends QBiCPortletUI {
 
-    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_ui }}.class);
+    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.entry_point }}.class);
 
     @Override
     protected Layout getPortletContent(final VaadinRequest request) {
@@ -50,7 +50,7 @@ public class {{ cookiecutter.main_ui }} extends QBiCPortletUI {
     }
 
     //================== this is just some test code, do with it whatever you must ==================
-    private static final boolean USING_OPEN_BIS = {%- if cookiecutter.use_openbis == "yes" %} true {%- else -%} false {%- endif -%};
+    private static final boolean USING_OPEN_BIS = {%- if cookiecutter.use_openbis_client == "yes" %} true {%- else -%} false {%- endif -%};
     private static final boolean USING_QBIC_DATABASES = {%- if cookiecutter.use_qbic_databases == "yes" %} true {%- else -%} false {%- endif -%};
 
     private Layout REMOVE_THIS_METHOD_AND_DO_YOUR_OWN_THING_COMMA_PLEASE(final VaadinRequest request) {
@@ -63,7 +63,7 @@ public class {{ cookiecutter.main_ui }} extends QBiCPortletUI {
         } else {
             builder.append("You are currently in a local testing mode. No Liferay Portlet context found.");
         }        
-        builder.append("<br/>You can now start developing. Start by modifying the <font face='monospace'>getPortletContent</font> method in the generated <font face='monospace'>src/main/java/life/qbic/portal/portlet/{{ cookiecutter.main_ui}}.java</font> file.<br/><br/>");
+        builder.append("<br/>You can now start developing. Start by modifying the <font face='monospace'>getPortletContent</font> method in the generated <font face='monospace'>src/main/java/life/qbic/portal/portlet/{{ cookiecutter.entry_point}}.java</font> file.<br/><br/>");
 
         final Label welcomeLabel = new Label(builder.toString(), ContentMode.HTML);
 
@@ -197,7 +197,7 @@ public class {{ cookiecutter.main_ui }} extends QBiCPortletUI {
     }
 
     private boolean isOpenBISWorking(final String dataSourceUser, final String dataSourcePassword, final String dataSourceUrl) {
-        {% if cookiecutter.use_openbis == "yes" -%}
+        {% if cookiecutter.use_openbis_client == "yes" -%}
         boolean success = false;
         try {
             final life.qbic.openbis.openbisclient.OpenBisClient openBisClient = new life.qbic.openbis.openbisclient.OpenBisClient(dataSourceUser, dataSourcePassword, dataSourceUrl);

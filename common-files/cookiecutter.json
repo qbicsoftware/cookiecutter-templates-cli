@@ -5,8 +5,9 @@
     "display_name": "Honey Pot Portlet",
     "version": "0.0.1-SNAPSHOT",
     "short_description": "Portlet that produces honey 24/7.",
-    "main_ui": "HoneyPotPortletUI",
+    "entry_point": "HoneyPotPortletUI",
     "copyright_holder": "QBiC",
-    "use_openbis": ["yes", "no"],
+    "use_openbis_client": ["yes", "no"],
+    "use_openbis_raw_api": ["yes", "no"],
     "use_qbic_databases": ["yes", "no"]
 }
