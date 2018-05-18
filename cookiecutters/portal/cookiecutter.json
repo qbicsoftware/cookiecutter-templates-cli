@@ -1,0 +1,9 @@
+{
+    "author": "Winnie Pooh",
+    "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
+    "artifact_id": "honey-math-lib",
+    "display_name": "Honey math library",
+    "version": "0.0.1-SNAPSHOT",
+    "short_description": "Simple utility library using Liferay and Vaadin.",
+    "copyright_holder": "QBiC"
+}

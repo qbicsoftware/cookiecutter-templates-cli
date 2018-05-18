@@ -1,0 +1,13 @@
+{
+    "author": "Winnie Pooh",
+    "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
+    "artifact_id": "honey-pot-portlet",
+    "display_name": "Honey Pot Portlet",
+    "version": "0.0.1-SNAPSHOT",
+    "short_description": "Simple Vaadin portlet running on Liferay to make honey 24/7.",
+    "main_ui": "HoneyPotPortletUI",
+    "copyright_holder": "QBiC",
+    "use_openbis_client": ["yes", "no"],
+    "use_openbis_raw_api": ["yes", "no"],
+    "use_qbic_databases": ["yes", "no"]
+}
