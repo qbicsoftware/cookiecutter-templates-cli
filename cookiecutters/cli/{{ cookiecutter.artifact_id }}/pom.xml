@@ -65,6 +65,12 @@
 			<groupId>life.qbic</groupId>
 			<artifactId>openbis-client-lib</artifactId>
 		</dependency>
+		<dependency>
+  			<groupId>com.github.stefanbirkner</groupId>
+  			<artifactId>system-rules</artifactId>
+  			<version>1.17.2</version>
+  			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

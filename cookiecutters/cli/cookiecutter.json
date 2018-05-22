@@ -1,10 +1,10 @@
 {
     "author": "Winnie Pooh",
     "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
-    "artifact_id": "openbis-tester-cli",
-    "display_name": "openBIS command-line tool",
-    "main_class": "ConnectionTester",
+    "artifact_id": "sample-cli",
+    "display_name": "Sample Tool",
+    "main_class": "SampleTool",
     "version": "0.0.1-SNAPSHOT",
-    "short_description": "Simple command-line utility to determine if an openBIS instance is online.",
+    "short_description": "Sample command-line utility to determine if an openBIS instance is online.",
     "copyright_holder": "QBiC"
 }
