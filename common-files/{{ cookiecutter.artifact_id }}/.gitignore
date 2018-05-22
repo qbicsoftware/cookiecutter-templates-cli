@@ -16,3 +16,7 @@
  
 # Maven
 target/
+
+# Some of our applications generate logs, which they should
+# be ignored by git
+logs/

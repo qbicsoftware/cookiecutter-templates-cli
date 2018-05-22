@@ -21,3 +21,6 @@ target/
 # Misc
 bin/
 .cookiecutter_working_folder/
+
+# Specific to this project
+generated/
