@@ -65,11 +65,10 @@
 			<groupId>life.qbic</groupId>
 			<artifactId>openbis-client-lib</artifactId>
 		</dependency>
+		<!-- Assists in testing methods that call System.exit -->
 		<dependency>
   			<groupId>com.github.stefanbirkner</groupId>
   			<artifactId>system-rules</artifactId>
-  			<version>1.17.2</version>
-  			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
