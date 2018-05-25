@@ -7,18 +7,14 @@ from cookiecutter.cli import validate_extra_context
 
 # these variables are folder paths relative to the location of this script
 COOKIECUTTERS_ROOT_FOLDER = 'cookiecutters'
-CLI_FOLDER = 'cli'
-GENERIC_LIB_FOLDER = 'generic'
-PORTAL_LIB_FOLDER = 'portal'
-PORTLET_FOLDER = 'portlet'
 WORKING_FOLDER = '.cookiecutter_working_folder'
 COMMON_FILES_FOLDER = 'common-files'
 DEFAULT_OUTPUT_DIR = 'generated'
 
 # parses arguments
 def main():
-    parser = argparse.ArgumentParser(description='QBiC Project Generator.', prog='generate.py')
-    parser.add_argument('-t', '--type', choices=['cli', 'generic-lib', 'portal-lib', 'portlet'], required=True, 
+    parser = argparse.ArgumentParser(description='QBiC Project Generator.', prog='generate.py', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-t', '--type', choices=['cli', 'generic-lib', 'portal-lib', 'portlet'], required=True, default='portlet',
         help='The type of artifact you want to generate (i.e., generic Java library, portal library, CLI tool or portlet).')
     parser.add_argument('--no-input', action='store_true', 
         help='If set, default values, as defined in the correspoing cookiecutter.json, will be used and no prompt will be displayed. There is one cookiecutter.json file associated with each type (e.g., cli/cookiecutter.json, portal/cookiecutter.json)')
@@ -33,14 +29,7 @@ def main():
     generate_cookiecutter_project(args)
 
 def generate_cookiecutter_project(kwargs):
-    cookiecutter_folder = {
-        'cli': CLI_FOLDER,
-        'generic-lib': GENERIC_LIB_FOLDER,
-        'portal-lib': PORTAL_LIB_FOLDER,
-        'portlet': PORTLET_FOLDER
-    }[kwargs.type]
-
-    prepare_cookiecutter_template(os.path.join(COOKIECUTTERS_ROOT_FOLDER, cookiecutter_folder))
+    prepare_cookiecutter_template(os.path.join(COOKIECUTTERS_ROOT_FOLDER, kwargs.type))
     cookiecutter(WORKING_FOLDER, no_input=kwargs.no_input, overwrite_if_exists=True, extra_context=kwargs.extra_context, output_dir=kwargs.output_dir)
     
 # removes any lingering working folder, copies content from the desired cookecutter folder (e.g., portal/portlet)
