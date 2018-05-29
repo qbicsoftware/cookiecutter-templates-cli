@@ -60,28 +60,5 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		{%- if cookiecutter.use_openbis_client == "yes" %}				
-		<!-- openBIS client (version defined in parent POM) -->
-		<dependency>
-			<groupId>life.qbic</groupId>
-			<artifactId>openbis-client-lib</artifactId>
-		</dependency>		
-		{% endif %}
-		{% if cookiecutter.use_openbis_raw_api == "yes" %}				
-		<!-- openBIS API (version defined in parent POM) -->
-		<dependency>
-			<groupId>life.qbic.openbis</groupId>
-			<artifactId>openbis_api</artifactId>
-		</dependency>		
-		{% endif %}		
-		{% if cookiecutter.use_qbic_databases == "yes" %}		
-		<!-- Access to our custom databases (portlets use direct JDBC to access data for now),
-			 but we will create a client library that portlets will use 
-			 (version  is defined in the parent POM hierarchy (/portal/pom.xml)) -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-		</dependency>		
-		{% endif %}	
 	</dependencies>
 </project>

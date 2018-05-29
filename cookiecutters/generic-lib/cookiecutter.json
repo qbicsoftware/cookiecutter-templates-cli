@@ -5,8 +5,5 @@
     "display_name": "Sample Library",
     "version": "0.0.1-SNAPSHOT",
     "short_description": "Sample generic library.",
-    "copyright_holder": "QBiC",
-    "use_openbis_client": ["yes", "no"],
-    "use_openbis_raw_api": ["yes", "no"],
-    "use_qbic_databases": ["yes", "no"]
+    "copyright_holder": "QBiC"
 }
