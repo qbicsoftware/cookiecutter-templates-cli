@@ -38,8 +38,8 @@ script: "./.travis.sh"
 matrix:
   # we will use this job to generate the code coverage report, no need to execute it twice
   exclude:
-  - python: "3.6"
-    env: TYPE=portlet USE_OPENBIS_RAW_API=yes USE_OPENBIS_CLIENT=yes USE_QBIC_DATABASES=yes
+    - python: "3.6"
+      env: TYPE=portlet USE_OPENBIS_RAW_API=yes USE_OPENBIS_CLIENT=yes USE_QBIC_DATABASES=yes
 
 jobs:
   include:
