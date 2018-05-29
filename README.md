@@ -307,7 +307,7 @@ We strongly recommend you to set the `development` branch as your default branch
 You can edit the `.travis.yml` file to tell Travis to send slack notifications. In your GitHub local repository folder execute:
 
 ```bash
-travis encrypt "<your GitHub Account>:<token>" --add notifications.slack.rooms
+$ travis encrypt "<your GitHub Account>:<token>" --add notifications.slack.rooms
 ```
 
 Where `<token>` can be obtained by clicking on the "Edit configuration" icon (it looks like a pencil) [in this page](https://qbictalk.slack.com/apps/A0F81FP4N-travis-ci).
