@@ -45,7 +45,6 @@ You will need the following:
 * [Apache Maven][maven].
 * [Travis CI Client][travis-console].
 * Access to the [QBiC Software GitHub organization](https://github.com/qbicsoftware) so you can create your own GitHub repository.
-* [portal-utils-lib](https://github.com/qbicsoftware/portal-utils-lib)
 
 ## Repository structure
 This is a simplified view of the structure of this repository:
