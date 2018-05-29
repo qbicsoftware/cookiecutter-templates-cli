@@ -39,6 +39,7 @@ matrix:
   # we will use this job to generate the code coverage report, no need to execute it twice
   exclude:
     - python: "3.6"
+      # this value must match EXACTLY as defined, including whitespace between elements!
       env: TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
 
 jobs:
@@ -46,7 +47,7 @@ jobs:
     - stage: "Code Coverage"
       # generate only one code coverage report
       python: "3.6"
-      env: TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+      env: TYPE=portlet USE_OPENBIS_RAW_API=yes USE_OPENBIS_CLIENT=yes USE_QBIC_DATABASES=yes
       script: "./.travis.sh"
       after_success:
         - codecov      
