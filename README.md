@@ -81,7 +81,7 @@ The first thing you will probably notice is the strange name (`{{ cookiecutter.a
 Notice how each of available templates has its own sub-folder under `cookiecutters` (e.g., the `cookiecutters/generic-lib` folder contains code specific for generic Java libraries). However, since our projects have a few files in common, we have also created a `common-files` folder.
 
 ## Usage
-You will first need to clone this repository because interaction with this tool is through the command line. At some point we might even be able to _dockerize_ this tool, so no cloning would be needed, but here we are.
+You will first need to clone this repository. Interaction with this tool is through the command line.
 
 ### Introduction
 `generate.py` is a wrapper Python script that helps you automate the task of creating a new project. It uses [Cookiecutter's][cookiecutter] Python API internally to use templates. You can display its usage like so:
@@ -128,16 +128,16 @@ Choose from 1, 2 [1]: 1
 ```
 
 The values shown between brackets are the defaults. But first, here's an overview of the meaning of each variable. All project types have references to these variables:
-* `author`_`: your real name, unless you are in the EU witness-protection program or have a really cool nickname, like Rocketboy or Aquagirl.
-* `email`: the electronic address that one ought to use if one were willing to contact thee.
+* `author`: your real name, unless you are in the EU witness-protection program or have a really cool nickname, like Rocketboy or Aquagirl.
+* `email`: the electronic address that one ought to use if one were willing to contact thee with matters related to the project you are creating.
 * `artifact_id`: recall that all [maven] artifacts are identified by three fields, namely, `groupId`, `artifactId`, `version`. This `artifact_id` refers to _that_ `artifactId` in your `pom.xml`. Check our naming and versioning conventions guide if you are not sure about this one.
 * `display_name`: the "human-friendly" name of your portlet, e.g., _Problem Generator Portlet_, _Project Wizzard (sic) Support Library_, _The "rm -Rf *" Companion Portlet_.
 * `version`: if this is a new project, use the default, but if you are migrating a project, maybe you should consider a major version update. In any case, consider our naming and versioning conventions guide.
 * `short_description`: a short set of words that, when put together in a sentence, explain what your project does. You know, _short description_ of your project.
 * `copyright_holder`: talk to our lawyers about this one. I am not allowed to explain this one anymore since the accident.
 
-The `main_class` variables is used only by `portlet` and `cli` projects. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting: 
-* In the case of portlets, this refers to the [short name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of the class that extends the [`com.vaadin.ui.UI` class](https://vaadin.com/api/7.7.2/com/vaadin/ui/UI.html). All Tomcat, Liferay and Vaadin configuration files assume that your class belongs in the `life.qbic.portal.portlet` package. For new portlets, this should not be a problem, but if you are migrating a portlet and want to benefit from this tool, you must refactor your code to reflect this restriction. 
+The `main_class` variable is used only by `portlet` and `cli` projects. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting: 
+* In the case of portlets, this refers to the [short name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of the class that extends the [`com.vaadin.ui.UI` class](https://vaadin.com/api/7.7.2/com/vaadin/ui/UI.html). All Tomcat, Liferay and Vaadin configuration files assume that your class belongs in the `life.qbic.portal.portlet` package. For new portlets, this should not be a problem, but if you are migrating a portlet and want to benefit from this tool, you must refactor your code to reflect this restriction.
 * For CLI tools this means the class that contains your [`public staticvoid main(String[] args)` method](https://docs.oracle.com/javase/tutorial/getStarted/application/index.html).
 
 By now, you might have realized that even the simplest portlet requires several configuration files and a cup of coffee. This is a task where developers' time is simply wasted. So we naturally put a lot of effort in first automating portlet generation. This is why the sample portlet that this tool generates is by far the most complex and you can even configure its "sample functionality". The following variables apply only to portlets:
