@@ -35,8 +35,15 @@ env:
 
 script: "./.travis.sh"
 
-after_success:
-  - codecov
+jobs:
+  include:
+    - stage: "Code Coverage"
+      # generate only one code coverage report
+      python: "3.6"
+      env: TYPE=portlet USE_OPENBIS_RAW_API=yes USE_OPENBIS_CLIENT=yes USE_QBIC_DATABASES=yes
+      script: "./.travis.sh"
+      after_success:
+        - codecov      
 
 notifications:
   email:
