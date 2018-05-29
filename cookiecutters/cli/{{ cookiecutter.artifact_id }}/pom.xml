@@ -13,6 +13,7 @@
 	<version>{{ cookiecutter.version }}</version>
 	<name>{{ cookiecutter.display_name }}</name>
 	<url>http://github.com/qbicsoftware/{{ cookiecutter.artifact_id }}</url>
+	<description>{{ cookiecutter.short_description }}</description>
 	<packaging>jar</packaging>
 	<!-- we only need to tell maven where to find our parent pom and other QBiC dependencies -->
 	<repositories>

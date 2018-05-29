@@ -4,7 +4,7 @@
     "artifact_id": "sample-cli",
     "display_name": "Sample Tool",
     "main_class": "SampleTool",
-    "version": "0.0.1-SNAPSHOT",
+    "version": "1.0.0-SNAPSHOT",
     "short_description": "Sample command-line utility to determine if an openBIS instance is online.",
     "copyright_holder": "QBiC"
 }

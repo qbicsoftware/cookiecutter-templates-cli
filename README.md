@@ -81,6 +81,8 @@ The first thing you will probably notice is the strange name (`{{ cookiecutter.a
 Notice how each of available templates has its own sub-folder under `cookiecutters` (e.g., the `cookiecutters/generic-lib` folder contains code specific for generic Java libraries). However, since our projects have a few files in common, we have also created a `common-files` folder.
 
 ## Usage
+You will first need to clone this repository because interaction with this tool is through the command line. At some point we might even be able to _dockerize_ this tool, so no cloning would be needed, but here we are.
+
 ### Introduction
 `generate.py` is a wrapper Python script that helps you automate the task of creating a new project. It uses [Cookiecutter's][cookiecutter] Python API internally to use templates. You can display its usage like so:
 
@@ -107,10 +109,10 @@ author [Winnie Pooh]: Homer Simpson
 email [winnie.the.pooh@qbic.uni-tuebingen.de]: simpson@burns.com
 artifact_id [sample-portlet]: donut-portlet
 display_name [Sample Portlet]: Donut Portlet
-version [0.0.1-SNAPSHOT]: 
+version [1.0.0-SNAPSHOT]: 
 short_description [Will never portLET you go.]: Mmm donuts
-main_ui [SamplePortletUI]: DonutPortletUI
 copyright_holder [QBiC]: Mr. Burns
+main_class [SamplePortletUI]: DonutPortletUI
 Select use_openbis_client:
 1 - yes
 2 - no
@@ -125,12 +127,28 @@ Select use_qbic_databases:
 Choose from 1, 2 [1]: 1
 ```
 
-The values shown between brackets are the defaults. To use the default value (as Homer did here for `version`), simply press `ENTER` without entering any other text. Default values are provided in `cookiecutter.json` files (there's one for each template type). In any case, **make sure to consult our naming and versioning conventions guide**.
+The values shown between brackets are the defaults. But first, here's an overview of the meaning of each variable. All project types have references to these variables:
+* `author`_`: your real name, unless you are in the EU witness-protection program or have a really cool nickname, like Rocketboy or Aquagirl.
+* `email`: the electronic address that one ought to use if one were willing to contact thee.
+* `artifact_id`: recall that all [maven] artifacts are identified by three fields, namely, `groupId`, `artifactId`, `version`. This `artifact_id` refers to _that_ `artifactId` in your `pom.xml`. Check our naming and versioning conventions guide if you are not sure about this one.
+* `display_name`: the "human-friendly" name of your portlet, e.g., _Problem Generator Portlet_, _Project Wizzard (sic) Support Library_, _The "rm -Rf *" Companion Portlet_.
+* `version`: if this is a new project, use the default, but if you are migrating a project, maybe you should consider a major version update. In any case, consider our naming and versioning conventions guide.
+* `short_description`: a short set of words that, when put together in a sentence, explain what your project does. You know, _short description_ of your project.
+* `copyright_holder`: talk to our lawyers about this one. I am not allowed to explain this one anymore since the accident.
+
+The `main_class` variables is used only by `portlet` and `cli` projects. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting: 
+* In the case of portlets, this refers to the [short name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of the class that extends the [`com.vaadin.ui.UI` class](https://vaadin.com/api/7.7.2/com/vaadin/ui/UI.html). All Tomcat, Liferay and Vaadin configuration files assume that your class belongs in the `life.qbic.portal.portlet` package. For new portlets, this should not be a problem, but if you are migrating a portlet and want to benefit from this tool, you must refactor your code to reflect this restriction. 
+* For CLI tools this means the class that contains your [`public staticvoid main(String[] args)` method](https://docs.oracle.com/javase/tutorial/getStarted/application/index.html).
+
+By now, you might have realized that even the simplest portlet requires several configuration files and a cup of coffee. This is a task where developers' time is simply wasted. So we naturally put a lot of effort in first automating portlet generation. This is why the sample portlet that this tool generates is by far the most complex and you can even configure its "sample functionality". The following variables apply only to portlets:
+* `use_openbis_client`: whether your portlet will interact with openBIS through our [openBIS client](https://github.com/qbicsoftware/openbis-client-lib).
+* `use_openbis_raw_api`: if you are accessing openBIS _by the book_, then you probably know what you are doing, so this one needs no further explanation.
+* `use_qbic_databases`: for now, we define two kinds of databases: openBIS and the rest. This is _the rest_. For now. If your portlet uses 
+
+To use the default value (as Homer did here for `version`), simply press `ENTER` without entering any other text. Default values are provided in `cookiecutter.json` files (there's one for each template type).
 
 ### Location of generated code
-`generate.py` will create your project in the `generated` folder. All templates generate a very simple sample project.
-
-The name of the generated folder is determined by the value of the ``{{ cookiecutter.artifact_id }}`` variable (i.e., ``donut-portlet`` in our example). So in this case, you will see your generated sample porlet in the folder `generated/donut-portlet`.
+`generate.py` will create your project in the `generated` folder. All templates generate a very simple sample project and each project will get its own folder. The name of the generated folder is determined by the value of the ``{{ cookiecutter.artifact_id }}`` variable (i.e., ``donut-portlet`` in our example). So in this case, you will see your generated sample porlet in the folder `generated/donut-portlet`. You can now think of this folder as your local GitHub repository, feel free to move it to a more convenient location.
 
 ### Change output folder
 If you want your created projects to be placed somewhere else, you can use the `-o`/`--output-dir` argument to tell `generate.py` where to place its output:
@@ -146,13 +164,13 @@ If you do not want to be prompted for values, you can use the `--no-input` flag:
 $ ./generate.py --type portal-lib --no-input
 ```
 
-This will use whichever values are stored in the corresponding `cookiecutter.json` file. In this case, the defaults values will be loaded from `cookiecutters/portal-lib/cookiecutter.json`. 
+This will use whichever values are stored in the corresponding `cookiecutter.json` file. In the example above, the defaults values will be loaded from `cookiecutters/portal-lib/cookiecutter.json`. 
 
 ### Provide values without editing files
 But what if you do not want to edit `cookiecutter.json` files everytime? You can use positional arguments in the form of `name=value`, like so:
 
 ```bash
-$ ./generate.py --type cli --no-input artifact_id=sample-cli version=1.1-SNAPSHOT
+$ ./generate.py --type cli --no-input artifact_id=sample-cli version=1.1.0-SNAPSHOT
 ```
 
 ## Layout of the generated projects

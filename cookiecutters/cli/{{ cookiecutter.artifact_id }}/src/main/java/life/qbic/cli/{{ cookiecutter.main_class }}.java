@@ -32,7 +32,7 @@ public class {{ cookiecutter.main_class }}  {
         } catch (Exception e) {
             LOG.warn("Could not load tools.properties file. Loading default version/project-url.", e);
         }
-        VERSION = properties.getProperty("version", "0.0.1-SNAPSHOT");
+        VERSION = properties.getProperty("version", "1.0.0-SNAPSHOT");
         PROJECT_URL = properties.getProperty("project.url", "http://github.com/qbicsoftware");
     }
 

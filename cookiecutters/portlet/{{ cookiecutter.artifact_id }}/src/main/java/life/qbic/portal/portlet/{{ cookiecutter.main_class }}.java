@@ -39,9 +39,9 @@ import life.qbic.portal.Styles.NotificationType;
 @Theme("mytheme")
 @SuppressWarnings("serial")
 @Widgetset("life.qbic.portlet.AppWidgetSet")
-public class {{ cookiecutter.main_ui }} extends QBiCPortletUI {
+public class {{ cookiecutter.main_class }} extends QBiCPortletUI {
 
-    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_ui }}.class);
+    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}.class);
 
     @Override
     protected Layout getPortletContent(final VaadinRequest request) {
@@ -63,7 +63,7 @@ public class {{ cookiecutter.main_ui }} extends QBiCPortletUI {
         } else {
             builder.append("You are currently in a local testing mode. No Liferay Portlet context found.");
         }        
-        builder.append("<br/>You can now start developing. Start by modifying the <font face='monospace'>getPortletContent</font> method in the generated <font face='monospace'>src/main/java/life/qbic/portal/portlet/{{ cookiecutter.main_ui}}.java</font> file.<br/><br/>");
+        builder.append("<br/>You can now start developing. Start by modifying the <font face='monospace'>getPortletContent</font> method in the generated <font face='monospace'>src/main/java/life/qbic/portal/portlet/{{ cookiecutter.main_class}}.java</font> file.<br/><br/>");
 
         final Label welcomeLabel = new Label(builder.toString(), ContentMode.HTML);
 

@@ -3,7 +3,7 @@
     "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
     "artifact_id": "sample-lib",
     "display_name": "Sample Library",
-    "version": "0.0.1-SNAPSHOT",
+    "version": "1.0.0-SNAPSHOT",
     "short_description": "Sample generic library.",
     "copyright_holder": "QBiC"
 }
