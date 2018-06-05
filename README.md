@@ -28,7 +28,7 @@
         - [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci-optional)
 
 ## Motivation
-There is a lot of boilerplate code associated to building Vaadin portlets for Liferay portals, so it makes sense to automate their creation. We first started by using [cookiecutter templates][cookiecutter] to generate a sample Liferay/Vaadin portlet based on [Maven][maven], but we have now created templates for other kinds of projects: command-line tools, portal and generic libraries.
+There is a lot of boilerplate code associated to building Vaadin portlets for Liferay portals, so it makes sense to automate their creation. We first started by using [cookiecutter templates][cookiecutter] to generate a sample Liferay/Vaadin portlet based on [Maven][maven], but we have now created templates for other kinds of Java projects: command-line tools, portal and generic libraries.
 
 ## Available templates
 * Vaadin Portlet running on Liferay: this is your common, run-of-the-mill portlet.
