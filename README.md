@@ -81,7 +81,7 @@ The first thing you will probably notice is the strange name (`{{ cookiecutter.a
 Notice how each of available templates has its own sub-folder under `cookiecutters` (e.g., the `cookiecutters/generic-lib` folder contains code specific for generic Java libraries). However, since our projects have a few files in common, we have also created a `common-files` folder.
 
 ## Usage
-You will first need to clone this repository. Interaction with this tool is through the command line.
+You will first need to clone this repository. Make sure to update your local copy so you won't miss the latest features and bug fixes. Interaction with this tool is through the command line.
 
 ### Introduction
 `generate.py` is a wrapper Python script that helps you automate the task of creating a new project. It uses [Cookiecutter's][cookiecutter] Python API internally to use templates. You can display its usage like so:
