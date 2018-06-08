@@ -1,6 +1,8 @@
 language: python
 python:
   - "2.7"
+  - "3.4"
+  - "3.5"
   - "3.6"  
 sudo: false
 
@@ -33,7 +35,10 @@ env:
   - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
   - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
 
-script: "./.travis.sh"
+script: rm -Rf template-test && 
+        ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_CLIENT use_qbic_databases=$USE_QBIC_DATABASES &&
+        pytest --cov=./ &&
+        mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
 
 matrix:
   # we will use this job to generate the code coverage report, no need to execute it twice
