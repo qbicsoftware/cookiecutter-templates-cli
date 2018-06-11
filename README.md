@@ -1,5 +1,5 @@
 # Cookiecutter templates CLI tool
-[![Build Status](https://travis-ci.org/qbicsoftware/cookiecutter-templates-cli.svg?branch=development)](https://travis-ci.org/qbicsoftware/cookiecutter-templates-cli)[![Code Coverage](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli)
+[![Build Status](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli.svg?branch=development)](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli)[![Code Coverage](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli)
 
 ## Table of contents
 - [Cookiecutter templates CLI tool](#cookiecutter-templates-cli-tool)
@@ -315,8 +315,8 @@ The generated `donut-portlet` folder contains a `.travis.yml` file that will hel
 
 Your repository should have been automatically added to our continuous integration system, but there has been a lot of changes in the platform that your experience might differ. Follow these steps to check that everything worked as advertised:
 
-  1. Navigate to (https://travis-ci.com/). Use your GitHub account to authenticate. Once you are logged in, g
-  2. Click on your name (upper-right corner). Your profile is now displayed.
+  1. Navigate to (https://travis-ci.com/). Use your GitHub account to authenticate.
+  2. Click on your name (upper-right corner). You should see your profile in [Travis CI][travis].
   3. Click the _Sync account_ button:
   
   ![sync-account](images/sync-account.png)
@@ -324,7 +324,10 @@ Your repository should have been automatically added to our continuous integrati
   4. Look for your repository. You might want to filter repositories by entering the full name of your repository (i.e., `donut-portlet`) or parts of it.
   5. Once you've found your repository, click on the _Settings_ button (![settings.png](images/settings.png)) displayed next to it.
 
-If you see the settings page, then it means that everything went fine.
+If you see the settings page, then it means that everything went fine. Make sure that the general settings of your repository match the ones shown below:
+
+![travis-repo-settings](images/travis-repo-settings.png)
+
 
 ### Deploying your project as a Maven artifact
 Even though our [Maven][maven] repository is visible to everyone publicly as read-only, you need to provide [Travis CI][travis] some credentials so it can upload artifacts into it. You will need to modify your `.travis.yml` file to add the encrypted username and password of our [Maven][maven] repository. In your local GitHub repository directory (i.e., `donut-portlet`) run the following commands using [the Travis console][travis-console]:
