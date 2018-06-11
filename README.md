@@ -1,13 +1,12 @@
 # Cookiecutter templates CLI tool
 [![Build Status](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli.svg?branch=development)](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli)[![Code Coverage](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli)
 
-## Table of contents
+## Table of contetns
 - [Cookiecutter templates CLI tool](#cookiecutter-templates-cli-tool)
-  * [Table of contents](#table-of-contents)
   * [Motivation](#motivation)
   * [Available templates](#available-templates)
-  * [Requirements](#requirements)
-  * [Repository structure](#repository-structure)
+  * [The basic tools you will need](#the-basic-tools-you-will-need)
+  * [Structure of this repository](#structure-of-this-repository)
   * [Usage](#usage)
     + [Introduction](#introduction)
     + [Location of generated code](#location-of-generated-code)
@@ -24,12 +23,14 @@
     + [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
     + [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
     + [Deploying your project as a Maven artifact](#deploying-your-project-as-a-maven-artifact)
-    + [Pushing your first version](#pushing-your-first-version)
+    + [Publishing your first version](#publishing-your-first-version)
     + [Change default branch](#change-default-branch)
     + [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci--optional-)
 
 ## Motivation
-There is a lot of boilerplate code associated to building Vaadin portlets for Liferay portals, so it makes sense to automate their creation. We first started by using [cookiecutter templates][cookiecutter] to generate a sample Liferay/Vaadin portlet based on [Maven][maven], but we have now created templates for other kinds of Java projects: command-line tools, portal and generic libraries.
+There is a lot of boilerplate code associated to building Vaadin portlets for Liferay portals, so it makes sense to automate their creation by using templates. 
+
+We first started by using [cookiecutter templates][cookiecutter] to generate a sample Liferay/Vaadin portlet based on [Maven][maven], but we have now created templates for other kinds of Java projects: command-line tools, portal and generic libraries, as well as added detailed documentation for developers.
 
 ## Available templates
 * Vaadin Portlet running on Liferay: this is your common, run-of-the-mill portlet.
@@ -37,17 +38,23 @@ There is a lot of boilerplate code associated to building Vaadin portlets for Li
 * Portlet libraries: libraries using Liferay and Vaadin dependencies (e.g., [portal-utils-lib](https://github.com/qbicsoftware/portal-utils-lib)).
 * Generic Java libraries: libraries that don't have Vaadin or Liferay as dependencies (e.g., [openbis-client-lib](https://github.com/qbicsoftware/openbis-client-lib)).
 
-## Requirements
-You will need the following:
+## The basic tools you will need
+You will first need access to the [QBiC Software GitHub organization](https://github.com/qbicsoftware) so you can create your own GitHub repository and contribute to our codebase.
 
-* Python, version 2.7 or more recent.
-* [Cookiecutter][cookiecutter], version 1.5 or more recent.
-* A Java 1.8 compatible SDK.
-* [Apache Maven][maven].
-* [Travis CI Client][travis-console].
-* Access to the [QBiC Software GitHub organization](https://github.com/qbicsoftware) so you can create your own GitHub repository.
+This is the "official" development environment in our group:
+  * Java:
+    + [OpenJDK 1.8 SDK](http://openjdk.java.net/install/).
+    + The most recent [Apache Maven][maven].
+  * Python: 
+    + We recommend using the [Conda][conda] package manager. We will soon release our tools as [Conda][conda] packages.
+      - Install [Cookiecutter][cookiecutter] by running this command:
+        ```bash
+        conda install -c conda-forge cookiecutter
+        ```
+  * Other tools:
+    + [Travis CI Client][travis-console].
 
-## Repository structure
+## Structure of this repository
 This is a simplified view of the structure of this repository:
 
 ```bash
@@ -82,25 +89,27 @@ The first thing you will probably notice is the strange name (`{{ cookiecutter.a
 Notice how each of available templates has its own sub-folder under `cookiecutters` (e.g., the `cookiecutters/generic-lib` folder contains code specific for generic Java libraries). However, since our projects have a few files in common, we have also created a `common-files` folder.
 
 ## Usage
-You will first need to clone this repository. Make sure to update your local copy (i.e., by using `git pull`) so you won't miss the latest features and bug fixes. Interaction with this tool is through the command line, for now.
+This is a fairly new tool, so, for now, you will first need to clone this repository. **Make sure to update your local copy regularly** (i.e., by using `git pull`) so you won't miss the latest features and bug fixes. This is a command-line tool, so you will need to have a terminal open while you read this guide.
 
 ### Introduction
-`generate.py` is a wrapper Python script that helps you automate the task of creating a new project. It uses [Cookiecutter's][cookiecutter] Python API internally to use templates. You can display its usage like so:
+`generate.py` is a wrapper Python script that helps you automate the task of creating a new project. It is located at the root folder of this repository. 
+
+This tool relies on [Cookiecutter's][cookiecutter] Python API to make good use of templates. You can display its usage like so:
 
 ```bash
-$ ./generate.py --help
+./generate.py --help
 ```
 
 To generate a specific template, you use the `-t`/`--type` parameter:
 
 ```bash
-$ ./generate.py --type <type>
+./generate.py --type <type>
 ```
 
 Supported types are `portlet`, `cli`, `portal-lib` and `generic-lib`, so if you want to generate a Vaadin portlet for Liferay, you would run the following command:
 
 ```bash
-$ ./generate.py --type portlet
+./generate.py --type portlet
 ```
 
 Regardless of which template type you are using, you will immediately see that you are prompted to enter some values, as shown here:
@@ -128,12 +137,12 @@ Select use_qbic_databases:
 Choose from 1, 2 [1]: 1
 ```
 
-The values shown between brackets are the defaults. To use the default value (as Homer did here for `version`), simply press `ENTER` without entering any other text. Default values are provided in `cookiecutter.json` files (there's one for each template type) and in [Cookiecutter's configuration file](http://cookiecutter.readthedocs.io/en/latest/advanced/user_config.html).
+The values shown between brackets are the defaults. To use the default value (as Homer did here for `version`), simply press `ENTER` without entering any other text. Default values are found in `cookiecutter.json` files (there's one for each template type) and in [Cookiecutter's configuration file](http://cookiecutter.readthedocs.io/en/latest/advanced/user_config.html).
 
 Let's first go through the meaning of each variable. **All project types** have references to these variables:
 * `author`: your real name, unless you are in the EU witness-protection program or have a really cool nickname, like Rocketboy or Aquagirl.
 * `email`: the electronic address that one ought to use if one were willing to contact thee with matters related to the project you are creating.
-* `artifact_id`: recall that all [maven] artifacts are identified by three fields, namely, `groupId`, `artifactId`, `version`. This `artifact_id` refers to _that_ `artifactId` in your `pom.xml`. Check our naming and versioning conventions guide if you are not sure about this one.
+* `artifact_id`: recall that all [Maven][maven] artifacts (i.e., distributable pieces of software) are identified by three fields, namely, `groupId`, `artifactId`, `version`. This `artifact_id` refers to _that_ `artifactId` in your `pom.xml`. All of our artifacts have the same `groupId`, namely `life.qbic`. Check our naming and versioning conventions guide if you are not sure about which value to enter.
 * `display_name`: the "human-friendly" name of your portlet, e.g., _Problem Generator Portlet_, _Project Wizzard (sic) Support Library_, _The "rm -Rf *" Companion Portlet_.
 * `version`: if this is a new project, use the default, but if you are migrating a project, maybe you should consider a major version update. In any case, consider our naming and versioning conventions guide.
 * `short_description`: a short set of words that, when put together in a sentence, explain what your project does. You know, _short description_ of your project.
@@ -155,14 +164,14 @@ By now, you might have realized that even the simplest portlet requires several 
 If you want your created projects to be placed somewhere else, you can use the `-o`/`--output-dir` argument to instruct `generate.py` to place its output somewhere else:
 
 ```bash
-$ ./generate.py --type portal-lib --output-dir /tmp/generated-projects
+./generate.py --type portal-lib --output-dir /tmp/generated-projects
 ```
 
 ### Provide values without using prompts
 If you do not want to be prompted for values, you can use the `--no-input` flag:
 
 ```bash
-$ ./generate.py --type portal-lib --no-input
+./generate.py --type portal-lib --no-input
 ```
 
 This will use whichever values are stored in the corresponding `cookiecutter.json` file. In the example above, the defaults values will be loaded from `cookiecutters/portal-lib/cookiecutter.json`. 
@@ -171,7 +180,7 @@ This will use whichever values are stored in the corresponding `cookiecutter.jso
 But what if you do not want to edit `cookiecutter.json` files everytime? You can use positional arguments in the form of `name=value`, like so:
 
 ```bash
-$ ./generate.py --type cli --no-input artifact_id=sample-cli version=1.1.0-SNAPSHOT
+./generate.py --type cli --no-input artifact_id=sample-cli version=1.1.0-SNAPSHOT
 ```
 
 ### Provide global default values
@@ -186,7 +195,7 @@ default_context:
 Now, every time Homer uses this tool, his global default values will be used and he will be able to simply press enter and use them:
 
 ```bash
-$ ./generate.py ...
+./generate.py ...
 
 author [Homer Simpson]:
 email [simpson@burns.com]:
@@ -251,7 +260,7 @@ As a general guideline, try to code the _logic_ of your portlet independent of t
 [Maven][maven] has been configured to execute unit tests under the `src/test` folder that match the _*Test_ name (e.g., `DonutPortletUITest`). To locally run the unit tests and generate a code coverage report, use the following command:
 
 ```bash
-$ mvn cobertura:cobertura
+mvn cobertura:cobertura
 ```
 
 Similarly, we have configured the [Maven][maven] plug-ins to run integration tests. These tests are also under the `src/test` folder, but their names must end with _*IntegrationTest_, such as `DonutPortletUIIntegrationTest`.
@@ -263,7 +272,7 @@ You can easily run the unit and integration tests for libraries you have written
 Go to the generated folder (i.e., `generated/donut-portlet` in our case) and run:
 
 ```bash
-$ mvn jetty:run
+mvn jetty:run
 ```
 
 You should see an output similar to:
@@ -282,25 +291,25 @@ Interact with the UI and, if this is your first portlet, we strongly suggest you
 We configured a [Maven][maven] plug-in to generate *stand-alone* JAR files. That is, [Maven][maven] will package all of the needed dependencies inside one single JAR file. Let's assume that you used the `cli` template as such:
 
 ```bash
-$ ./generate.py --type cli --no-input artifactId=donut-cli version=1.0-SNAPSHOT
+./generate.py --type cli --no-input artifactId=donut-cli version=1.0-SNAPSHOT
 ```
 
 This will generate your new CLI tool in the `generated/donut-cli` folder. To test your CLI tool locally, you first need to *package* your artifact using [Maven][maven] in the `generated/donut-cli` folder:
 
 ```bash
-$ mvn package
+mvn package
 ```
 
 You then need to use the following command:
 
 ```bash
-$ java -jar target/<artifactId>-<version>-jar-with-dependencies.jar
+java -jar target/<artifactId>-<version>-jar-with-dependencies.jar
 ```
 
 That is:
 
 ```bash
-$ java -jar target/donut-cli-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/donut-cli-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ### Create a new GitHub repository for your new project
@@ -330,26 +339,36 @@ If you see the settings page, then it means that everything went fine. Make sure
 
 
 ### Deploying your project as a Maven artifact
-Even though our [Maven][maven] repository is visible to everyone publicly as read-only, you need to provide [Travis CI][travis] some credentials so it can upload artifacts into it. You will need to modify your `.travis.yml` file to add the encrypted username and password of our [Maven][maven] repository. In your local GitHub repository directory (i.e., `donut-portlet`) run the following commands using [the Travis console][travis-console]:
+Any person on the internet can download [Maven][maven] artifacts from our [public Maven repository](https://qbic-repo.am10.uni-tuebingen.de). But in order to upload artifacts to our repository, you will need proper authentication. Since our code is also publicly available, we cannot simply write those credentials in clear text.
+
+Luckily, [Travis CI][travis] offers [a simple way to securely share our credentials](https://docs.travis-ci.com/user/encryption-keys/). You do not need to fully understand the implementation details to follow this guide, but no one will be angry at you if you do. 
+
+You will need to execute a few commands to add the encrypted credentials of our repository to `.travis.yml`. In your local GitHub repository folder (i.e., `donut-portlet`) login using [the Travis CI console][travis-console] (you will be asked for your GitHub username and password):
 
 ```bash
-$ travis encrypt "MAVEN_REPO_USERNAME=<username>" --add env.global
-$ travis encrypt "MAVEN_REPO_PASSWORD=<password>" --add env.global
+travis login --pro
 ```
 
-Ask the people who wrote this guide about the proper values of `<username>` and `<password>`. Encryption and decryption keys in [Travis CI][travis] are bound to their GitHub repository, so you cannot simply copy them from other places.
+Add the encrypted credentials by executing the following commands via [the Travis CI console][travis-console] (note, these commands will automatically edit `.travis.yml`): 
 
-### Pushing your first version
+```bash
+travis encrypt "MAVEN_REPO_USERNAME=<username>" --add env.global
+travis encrypt "MAVEN_REPO_PASSWORD=<password>" --add env.global
+```
+
+Ask the people who wrote this guide about the proper values of `<username>` and `<password>`. Encrypted values in [Travis CI][travis] are bound to their GitHub repository, so you cannot simply copy them from other repositories.
+
+### Publishing your first version
 In your local GitHub repository directory (i.e., `donut-portlet`) run the following commands:
 
 ```bash
-$ git init
-$ git add .
-$ git commit -m "Initial commit before pressing the 'flush radioactive material' button"
-$ git remote add origin https://github.com/qbicsoftware/donut-portlet
-$ git push origin master
-$ git checkout -b development
-$ git push origin development
+git init
+git add .
+git commit -m "Initial commit before pressing the 'flush radioactive material' button"
+git remote add origin https://github.com/qbicsoftware/donut-portlet
+git push origin master
+git checkout -b development
+git push origin development
 ```
 
 Of course, you must replace `donut-portlet` with the real name of your repository. You can now start using your repository containing your brand new portlet.
@@ -361,7 +380,7 @@ We strongly recommend you to set the `development` branch as your default branch
 You can edit the `.travis.yml` file to tell Travis to send slack notifications. In your GitHub local repository folder execute:
 
 ```bash
-$ travis encrypt "<your GitHub Account>:<token>" --add notifications.slack.rooms
+travis encrypt "<your GitHub Account>:<token>" --add notifications.slack.rooms
 ```
 
 Where `<token>` can be obtained by clicking on the "Edit configuration" icon (it looks like a pencil) [in this page](https://qbictalk.slack.com/apps/A0F81FP4N-travis-ci).
@@ -370,5 +389,6 @@ Where `<token>` can be obtained by clicking on the "Edit configuration" icon (it
 [cookiecutter]: https://cookiecutter.readthedocs.io
 [junit]: https://junit.org
 [travis]: https://travis-ci.com/
-[travis-qbic]: https://travis-ci.org/profile/qbicsoftware
+[travis-qbic]: https://travis-ci.com/profile/qbicsoftware
 [travis-console]: https://github.com/travis-ci/travis.rb
+[conda]: https://conda.io/docs/
