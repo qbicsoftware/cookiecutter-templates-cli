@@ -1,6 +1,6 @@
 # {{ cookiecutter.display_name }}
 
-[![Build Status](https://travis-ci.org/qbicsoftware/{{ cookiecutter.artifact_id }}.svg?branch=master)](https://travis-ci.org/qbicsoftware/{{ cookiecutter.artifact_id }})[![Code Coverage]( https://codecov.io/gh/qbicsoftware/{{ cookiecutter.artifact_id }}/branch/master/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/{{ cookiecutter.artifact_id }})
+[![Build Status](https://travis-ci.com/qbicsoftware/{{ cookiecutter.artifact_id }}.svg?branch=master)](https://travis-ci.com/qbicsoftware/{{ cookiecutter.artifact_id }})[![Code Coverage]( https://codecov.io/gh/qbicsoftware/{{ cookiecutter.artifact_id }}/branch/master/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/{{ cookiecutter.artifact_id }})
 
 {{ cookiecutter.display_name }}, version {{ cookiecutter.version }} - {{ cookiecutter.short_description }}
 
