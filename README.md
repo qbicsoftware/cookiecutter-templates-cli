@@ -1,5 +1,5 @@
 # Cookiecutter templates CLI tool
-[![Build Status](https://travis-ci.org/qbicsoftware/cookiecutter-templates-cli.svg?branch=development)](https://travis-ci.org/qbicsoftware/cookiecutter-templates-cli)[![Code Coverage](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli)
+[![Build Status](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli.svg?branch=development)](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli)[![Code Coverage](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli)
 
 ## Table of contents
 - [Cookiecutter templates CLI tool](#cookiecutter-templates-cli-tool)
