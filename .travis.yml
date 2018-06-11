@@ -36,7 +36,7 @@ env:
   - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
 
 script: rm -Rf template-test && 
-        ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_CLIENT use_qbic_databases=$USE_QBIC_DATABASES &&
+        ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&
         pytest --cov=./ &&
         mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
 
