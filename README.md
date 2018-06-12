@@ -266,7 +266,13 @@ The generated folder already contains simple [jUnit](junit) unit tests (i.e., in
 
 As a general guideline, try to code the _logic_ of your portlet independent of the user interface so you can easily write code that tests your portlet.
 
-[Maven][maven] has been configured to execute unit tests under the `src/test` folder that match the _*Test_ name (e.g., `DonutPortletUITest`). To locally run the unit tests and generate a code coverage report, use the following command:
+[Maven][maven] has been configured to execute unit tests under the `src/test` folder that match the _*Test_ name (e.g., `DonutPortletUITest`). To run all unit tests, you use the following command:
+
+```bash
+mvn test
+```
+
+We use [Cobertura](http://cobertura.github.io/cobertura/) to generate [coverage reports](https://en.wikipedia.org/wiki/Code_coverage). To run the unit tests and generate a code coverage report, simply run:
 
 ```bash
 mvn cobertura:cobertura
@@ -275,7 +281,7 @@ mvn cobertura:cobertura
 Similarly, we have configured the [Maven][maven] plug-ins to run integration tests. These tests are also under the `src/test` folder, but their names must end with _*IntegrationTest_, such as `DonutPortletUIIntegrationTest`.
 
 ### Test your code locally
-You can easily run the unit and integration tests for libraries you have written by using the `mvn cobertura:cobertura` command. This is, in fact, what our build system does. Take a look at the `.travis.yml` file located in the `common-files` if you to know all implementation details related to how we do continuous integration.
+You can easily run the unit and integration tests for libraries you have written by using the `mvn test` command. This is, more or less, what our build system does. Take a look at the `.travis.yml` file located in the `common-files` if you want to know all implementation details related to how we do continuous integration.
 
 #### Testing a portlet locally using Jetty
 Go to the generated folder (i.e., `generated/donut-portlet` in our case) and run:
