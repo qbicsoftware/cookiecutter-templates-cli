@@ -50,11 +50,12 @@ This is the "official" development environment in our group:
     + [OpenJDK 1.8 SDK](http://openjdk.java.net/install/).
     + The most recent [Apache Maven][maven].
   * Python: 
-    + We recommend using the [Conda][conda] package manager. We will soon release our tools as [Conda][conda] packages.
-      - Install [Cookiecutter][cookiecutter] by running this command:
+    + We recommend using the latest version of the [Conda][conda] package manager. We will soon release our tools as [Conda][conda] packages.
+      1. Create a [Conda environment](https://conda.io/docs/user-guide/tasks/manage-environments.html) on which you will install all required Python dependencies:
         ```bash
-        conda install -c conda-forge cookiecutter
+        conda create --channel conda-forge --name qbic cookiecutter python=3
         ```
+      2. Activate your new `qbic` environment by running `conda activate qbic`. If the `conda activate qbic` command fails, the printed warnings/errors are pretty self-explanatory, but have in mind that the `conda activate` command [has been made available in version 4.4](https://conda.io/docs/release-notes.html#new-feature-highlights).
   * Other tools:
     + [Travis CI Client][travis-console].
 

@@ -21,6 +21,7 @@ target/
 # Misc
 bin/
 .cookiecutter_working_folder/
+**/.factorypath
 
 # Specific to this project
 generated/

@@ -21,4 +21,4 @@ target/
 logs/
 
 # Other
-.factorypath
+**/.factorypath
