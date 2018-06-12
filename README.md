@@ -345,15 +345,11 @@ Luckily, [Travis CI][travis] offers [a simple way to securely share our credenti
 
 You will need to execute a few commands to add the encrypted credentials of our repository to `.travis.yml`. In your local GitHub repository folder (i.e., `donut-portlet`) login using [the Travis CI console][travis-console] (you will be asked for your GitHub username and password):
 
-```bash
-travis login --pro
-```
-
-Add the encrypted credentials by executing the following commands via [the Travis CI console][travis-console] (note, these commands will automatically edit `.travis.yml`): 
+Add the encrypted credentials by executing the following commands via [the Travis CI console][travis-console]. These commands will automatically edit `.travis.yml` (if you want edit the file yourself, do not use the `--add env.global` parameter): 
 
 ```bash
-travis encrypt "MAVEN_REPO_USERNAME=<username>" --add env.global
-travis encrypt "MAVEN_REPO_PASSWORD=<password>" --add env.global
+travis encrypt "MAVEN_REPO_USERNAME=<username>" --add env.global --pro
+travis encrypt "MAVEN_REPO_PASSWORD=<password>" --add env.global --pro
 ```
 
 Ask the people who wrote this guide about the proper values of `<username>` and `<password>`. Encrypted values in [Travis CI][travis] are bound to their GitHub repository, so you cannot simply copy them from other repositories.
