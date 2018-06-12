@@ -3,12 +3,16 @@
 
 ## Table of contetns
 - [Cookiecutter templates CLI tool](#cookiecutter-templates-cli-tool)
+  * [Table of contetns](#table-of-contetns)
   * [Motivation](#motivation)
   * [Available templates](#available-templates)
   * [The basic tools you will need](#the-basic-tools-you-will-need)
   * [Structure of this repository](#structure-of-this-repository)
   * [Usage](#usage)
     + [Introduction](#introduction)
+      - [Global variables](#global-variables)
+      - [Variables that apply only for portlets and command-line tools](#variables-that-apply-only-for-portlets-and-command-line-tools)
+      - [Variables that apply only for portlets](#variables-that-apply-only-for-portlets)
     + [Location of generated code](#location-of-generated-code)
     + [Change output folder](#change-output-folder)
     + [Provide values without using prompts](#provide-values-without-using-prompts)
@@ -94,13 +98,13 @@ This is a fairly new tool, so, for now, you will first need to clone this reposi
 ### Introduction
 `generate.py` is a wrapper Python script that helps you automate the task of creating a new project. It is located at the root folder of this repository. 
 
-This tool relies on [Cookiecutter's][cookiecutter] Python API to make good use of templates. You can display its usage like so:
+This tool relies on [Cookiecutter's][cookiecutter] Python API to make good use of templates. You can display its usage by providing the `--help` flag:
 
 ```bash
 ./generate.py --help
 ```
 
-To generate a specific template, you use the `-t`/`--type` parameter:
+To generate a specific template, use the `-t`/`--type` parameter:
 
 ```bash
 ./generate.py --type <type>
@@ -139,7 +143,10 @@ Choose from 1, 2 [1]: 1
 
 The values shown between brackets are the defaults. To use the default value (as Homer did here for `version`), simply press `ENTER` without entering any other text. Default values are found in `cookiecutter.json` files (there's one for each template type) and in [Cookiecutter's configuration file](http://cookiecutter.readthedocs.io/en/latest/advanced/user_config.html).
 
-Let's first go through the meaning of each variable. **All project types** have references to these variables:
+Let's first go through the meaning of each variable. 
+
+#### Global variables
+**All project types** have references to these variables:
 * `author`: your real name, unless you are in the EU witness-protection program or have a really cool nickname, like Rocketboy or Aquagirl.
 * `email`: the electronic address that one ought to use if one were willing to contact thee with matters related to the project you are creating.
 * `artifact_id`: recall that all [Maven][maven] artifacts (i.e., distributable pieces of software) are identified by three fields, namely, `groupId`, `artifactId`, `version`. This `artifact_id` refers to _that_ `artifactId` in your `pom.xml`. All of our artifacts have the same `groupId`, namely `life.qbic`. Check our naming and versioning conventions guide if you are not sure about which value to enter.
@@ -148,10 +155,12 @@ Let's first go through the meaning of each variable. **All project types** have 
 * `short_description`: a short set of words that, when put together in a sentence, explain what your project does. You know, _short description_ of your project.
 * `copyright_holder`: talk to our lawyers about this one or simply use the provided default value. We are not allowed to explain this one anymore since the accident.
 
-The `main_class` variable is used **only by `portlet` and `cli` projects**. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting: 
-* In the case of portlets, this refers to the [short name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of the class that extends the [`com.vaadin.ui.UI` class](https://vaadin.com/api/7.7.2/com/vaadin/ui/UI.html). All Tomcat, Liferay and Vaadin configuration files assume that your class belongs in the `life.qbic.portal.portlet` package. For new portlets, this should not be a problem, but if you are migrating a portlet and want to benefit from this tool, you must refactor your code to reflect this restriction.
-* For CLI tools this means the class that contains your [`public static void main(String[] args)` method](https://docs.oracle.com/javase/tutorial/getStarted/application/index.html).
+#### Variables that apply only for portlets and command-line tools
+The `main_class` variable is used **only by `portlet` and `cli` projects**. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting, but it refers to the [simple name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of a class (i.e., `Sample` is the simple name of class whose fully qualified name is `foo.bar.Sample`):
+* In the case of portlets, this refers to the simple name of the class that extends the [`com.vaadin.ui.UI` class](https://vaadin.com/api/7.7.2/com/vaadin/ui/UI.html). All Tomcat, Liferay and Vaadin configuration files assume that your class belongs in the `life.qbic.portal.portlet` package. For new portlets, this should not be a problem, but if you are migrating a portlet and want to benefit from this tool, you must refactor your code to reflect this restriction.
+* For CLI tools this means the simple name of the class that contains your [`public static void main(String[] args)` method](https://docs.oracle.com/javase/tutorial/getStarted/application/index.html).
 
+#### Variables that apply only for portlets
 By now, you might have realized that even the simplest portlet requires several configuration files and a cup of coffee. Trying to figure out why your portlet is not deploying or what exactly a configuration file is missing are tasks where developers' time is simply wasted. So we naturally put a lot of effort in first automating portlet generation. This is why the sample portlet that this tool generates is by far the most complex: you can even configure its "sample functionality". The following variables **apply only to portlets**:
 * `use_openbis_client`: whether your portlet will interact with openBIS through our [openBIS client](https://github.com/qbicsoftware/openbis-client-lib).
 * `use_openbis_raw_api`: if you are accessing openBIS _by the book_, then you probably know what you are doing, so this one needs no further explanation.
@@ -184,7 +193,7 @@ But what if you do not want to edit `cookiecutter.json` files everytime? You can
 ```
 
 ### Provide global default values
-After using this tool repeatedly, you will surely become annoyed at the fact that you have to type your name and your email address over and over, even though they haven't changed in the last couple of years. Luckily, [Cookiecutter offers a global configuration file](http://cookiecutter.readthedocs.io/en/latest/advanced/user_config.html). Create a file named `.cookiecutterrc` in your home folder (this varies across operating systems) and include your *global defaults* in it as shown here:
+After repeatedly using this tool, you will surely become annoyed at the fact that you have to type your name and your email address over and over, even though they haven't changed in the last couple of years. Luckily, [Cookiecutter offers a global configuration file](http://cookiecutter.readthedocs.io/en/latest/advanced/user_config.html). Create a file named `.cookiecutterrc` in your home folder (this varies across operating systems) and include your *global defaults* in it as shown here:
 
 ```bash
 default_context:
