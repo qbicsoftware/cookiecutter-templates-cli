@@ -17,6 +17,8 @@
 # Maven
 target/
 
-# Some of our applications generate logs, which they should
-# be ignored by git
+# Some of our applications generate logs, which should be ignored by git
 logs/
+
+# Other
+.factorypath
