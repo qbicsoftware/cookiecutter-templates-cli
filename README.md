@@ -45,6 +45,7 @@ We first started by using [cookiecutter templates][cookiecutter] to generate a s
 ## Available templates
 * Vaadin Portlet running on Liferay: this is your common, run-of-the-mill portlet.
 * Command-line tools: tools to be used using a console (e.g., [qpostman-cli](https://github.com/qbicsoftware/postman-cli)).
+* Services: these are similar to command-line tools in their structure, but once a service has been started, it stays "active" until shutdown, like our [portlet deployer service](https://github.com/qbicsoftware/portlet-deployer-service).
 * Portlet libraries: libraries using Liferay and Vaadin dependencies (e.g., [portal-utils-lib](https://github.com/qbicsoftware/portal-utils-lib)).
 * Generic Java libraries: libraries that don't have Vaadin or Liferay as dependencies (e.g., [openbis-client-lib](https://github.com/qbicsoftware/openbis-client-lib)).
 

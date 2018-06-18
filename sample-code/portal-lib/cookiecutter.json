@@ -1,0 +1,9 @@
+{
+    "author": "Winnie Pooh",
+    "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
+    "artifact_id": "sample-portal-lib",
+    "display_name": "Sample Portal Library",
+    "version": "1.0.0-SNAPSHOT",
+    "short_description": "Sample utility library using Liferay and Vaadin.",
+    "copyright_holder": "QBiC"
+}

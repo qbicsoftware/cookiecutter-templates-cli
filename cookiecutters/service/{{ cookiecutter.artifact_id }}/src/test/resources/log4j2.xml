@@ -1,0 +1,13 @@
+<Configuration status="INFO">
+    <Appenders>
+        <!-- use only sysout during testing -->
+        <Console name="SysOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="%msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="SysOut" level="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>

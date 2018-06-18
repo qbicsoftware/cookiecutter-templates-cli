@@ -1,6 +1,6 @@
 <Configuration status="INFO">
     <Appenders>
-        <!-- use only sysout during testing -->
+        <!-- this is a CLI tool, so we should log to console as-is -->
         <Console name="SysOut" target="SYSTEM_OUT">
             <PatternLayout pattern="%msg%n"/>
         </Console>
