@@ -10,14 +10,14 @@ import org.apache.logging.log4j.Logger;
  */
 public class {{ cookiecutter.main_class }}EntryPoint {
 
-    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}.class);
+    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}EntryPoint.class);
 
     /**
      * Main method.
      */
     public static void main(final String[] args) {
         LOG.debug("Starting {{ cookiecutter.main_class }} tool");
-        final ToolExecutor<{{ cookiecutter.main_class }}Command> executor = new ToolExecutor<{{ cookiecutter.main_class }}Command>();
-        executor.invoke({{ cookiecutter.main_class }}Service.class, {{ cookiecutter.main_class }}Command, args);
+        final ToolExecutor executor = new ToolExecutor();
+        executor.invoke({{ cookiecutter.main_class }}Service.class, {{ cookiecutter.main_class }}Command.class, args);
     }
 }

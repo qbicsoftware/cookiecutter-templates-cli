@@ -32,7 +32,7 @@ def main():
     generate_cookiecutter_project(args)
 
 def generate_cookiecutter_project(kwargs):
-    prepare_cookiecutter_template(os.path.join(COOKIECUTTERS_ROOT_FOLDER, kwargs.type))
+    prepare_cookiecutter_template(kwargs)
     cookiecutter(WORKING_FOLDER, no_input=kwargs.no_input, overwrite_if_exists=True, extra_context=kwargs.extra_context, output_dir=kwargs.output_dir)
     
 # removes any lingering working folder, copies content from the desired cookecutter folder (e.g., portal/portlet)

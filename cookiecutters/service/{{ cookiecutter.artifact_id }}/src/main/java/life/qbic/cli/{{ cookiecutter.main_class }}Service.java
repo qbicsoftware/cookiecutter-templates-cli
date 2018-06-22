@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class {{ cookiecutter.main_class }}Service extends QBiCTool<{{ cookiecutter.main_class }}Command> {
 
-    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}.class);
+    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}Service.class);
 
     /**
      * Constructor.

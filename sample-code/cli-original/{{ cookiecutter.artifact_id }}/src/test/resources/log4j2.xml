@@ -1,6 +1,6 @@
-<!-- no need for application log during tests -->
 <Configuration status="INFO">
-    <Appenders>        
+    <Appenders>
+        <!-- use only sysout during testing -->
         <Console name="SysOut" target="SYSTEM_OUT">
             <PatternLayout pattern="%msg%n"/>
         </Console>

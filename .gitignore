@@ -28,5 +28,8 @@ bin/
 **/.project
 **/target
 
+# App logs should be ignored
+**/logs
+
 # Specific to this project
 generated/

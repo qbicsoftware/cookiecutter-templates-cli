@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class {{ cookiecutter.main_class }}Tool extends QBiCTool<{{ cookiecutter.main_class }}Command> {
 
-    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}Tool.class);
+    private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}.class);
 
     /**
      * Constructor.
@@ -22,14 +22,17 @@ public class {{ cookiecutter.main_class }}Tool extends QBiCTool<{{ cookiecutter.
     }
 
     @Override
-    public void execute() {
-        // get the parsed command-line arguments
+    public void execute() {        
         final {{ cookiecutter.main_class }}Command command = super.getCommand();
 
-        // TODO: do something useful with the obtained command.
-        //
+        try {
+            // FIXME: one would typically pack this kind of logic in a library
+            final life.qbic.openbis.openbisclient.OpenBisClient openBisClient = new life.qbic.openbis.openbisclient.OpenBisClient(command.userName, command.password, command.url);
+            openBisClient.login();
+            returnCode = 0;
+        } catch (Exception e) {
+            LOG.error("Could not establish connection to openBIS server at {} (username={}, password=(****))", command.url, command.userName);
+        }
         
     }
-
-    // TODO: override the shutdown() method if you are implementing a daemon and want to take advantage of a shutdown hook for clean-up tasks
 }
