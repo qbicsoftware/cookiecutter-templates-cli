@@ -1,10 +1,10 @@
 {
     "author": "Winnie Pooh",
     "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
-    "artifact_id": "sample-cli",
-    "display_name": "Sample command-line Tool",
+    "artifact_id": "sample-gui",
+    "display_name": "Application to...",
     "main_class": "Sample",
     "version": "1.0.0-SNAPSHOT",
-    "short_description": "Command-line utility to...",
+    "short_description": "Stand-alone JavaFX application to...",
     "copyright_holder": "QBiC"
 }

@@ -15,7 +15,7 @@ DEFAULT_OUTPUT_DIR = 'generated'
 # parses arguments
 def main():
     parser = argparse.ArgumentParser(description='QBiC Project Generator.', prog='generate.py', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-t', '--type', choices=['cli', 'generic-lib', 'portal-lib', 'portlet', 'service'], required=True, default='portlet',
+    parser.add_argument('-t', '--type', choices=['cli', 'generic-lib', 'portal-lib', 'portlet', 'service', 'gui'], required=True, default='portlet',
         help='The type of artifact you want to generate (i.e., generic Java library, portal library, CLI tool or portlet).')
     parser.add_argument('--no-input', action='store_true', 
         help='If set, default values, as defined in the correspoing cookiecutter.json, will be used and no prompt will be displayed. There is one cookiecutter.json file associated with each type (e.g., cli/cookiecutter.json, portal/cookiecutter.json).')

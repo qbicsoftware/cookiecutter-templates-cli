@@ -56,10 +56,6 @@
 		Check your IDE's documentation to display maven's dependency tree.
 	-->
 	<dependencies>
-		<!-- basic validation -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
+		
 	</dependencies>
 </project>

@@ -61,16 +61,6 @@
 			<groupId>info.picocli</groupId>
 			<artifactId>picocli</artifactId>
 		</dependency>
-		<!-- openBIS client (version defined in parent POM) -->
-		<dependency>
-			<groupId>life.qbic</groupId>
-			<artifactId>openbis-client-lib</artifactId>
-		</dependency>
-		<!-- Assists in testing methods that call System.exit -->
-		<dependency>
-  			<groupId>com.github.stefanbirkner</groupId>
-  			<artifactId>system-rules</artifactId>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -86,7 +76,7 @@
 						<configuration>
 							<archive>
 								<manifest>
-									<mainClass>life.qbic.cli.{{ cookiecutter.main_class }}</mainClass>
+									<mainClass>life.qbic.cli.{{ cookiecutter.main_class }}EntryPoint</mainClass>
 								</manifest>
 							</archive>
 							<descriptorRefs>

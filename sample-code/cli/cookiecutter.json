@@ -2,9 +2,9 @@
     "author": "Winnie Pooh",
     "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
     "artifact_id": "sample-cli",
-    "display_name": "Sample Tool",
+    "display_name": "Sample command-line Tool",
     "main_class": "SampleTool",
     "version": "1.0.0-SNAPSHOT",
-    "short_description": "Sample command-line utility to determine if an openBIS instance is online.",
+    "short_description": "openBIS connection tester",
     "copyright_holder": "QBiC"
 }

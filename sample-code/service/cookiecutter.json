@@ -5,6 +5,6 @@
     "display_name": "Sample Service",
     "main_class": "SampleService",
     "version": "1.0.0-SNAPSHOT",
-    "short_description": "Sample service that replies 'pong' if you say 'ping'.",
+    "short_description": "Sample web service that replies 'pong' if you say 'ping'.",
     "copyright_holder": "QBiC"
 }

@@ -56,10 +56,14 @@
 		Check your IDE's documentation to display maven's dependency tree.
 	-->
 	<dependencies>
-		<!-- replaces liferayandvaadinutils (version defined in parent POM) -->
+		<!-- portal-utils-lib replaces liferayandvaadinutils (version defined in parent POM) -->
 		<dependency>
 			<groupId>life.qbic</groupId>
 			<artifactId>portal-utils-lib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>life.qbic</groupId>
+			<artifactId>core-utils-lib</artifactId>
 		</dependency>
 		{% if cookiecutter.use_openbis_client == "yes" %}		
 		<!-- openBIS client (version defined in parent POM) -->

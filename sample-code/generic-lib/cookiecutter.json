@@ -1,9 +1,9 @@
 {
     "author": "Winnie Pooh",
     "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
-    "artifact_id": "sample-lib",
-    "display_name": "Sample Library",
+    "artifact_id": "sample-generic-lib",
+    "display_name": "Sample generic Library",
     "version": "1.0.0-SNAPSHOT",
-    "short_description": "Sample generic library.",
+    "short_description": "Sample library containing two implementations of a simple algorithm that determines if a word is a palindrome.",
     "copyright_holder": "QBiC"
 }
