@@ -1,17 +1,7 @@
 package life.qbic.cli;
 
-import java.io.InputStream;
-import java.util.Properties;
-
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.config.Configurator;
-
-
-import picocli.CommandLine;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
 
 /**
  * Entry point for the {{ cookiecutter.display_name }} application.
@@ -27,7 +17,7 @@ public class {{ cookiecutter.main_class }}EntryPoint {
      */
     public static void main(final String[] args) {
         LOG.debug("Starting {{ cookiecutter.main_class }} tool");
-        final ToolExecutor<{{ cookiecutter.main_class }}Command> executor = new ToolExecutor<>();
+        final ToolExecutor<{{ cookiecutter.main_class }}Command> executor = new ToolExecutor<{{ cookiecutter.main_class }}Command>();
         executor.invoke({{ cookiecutter.main_class }}Tool.class, {{ cookiecutter.main_class }}Command, args);
     }
 }

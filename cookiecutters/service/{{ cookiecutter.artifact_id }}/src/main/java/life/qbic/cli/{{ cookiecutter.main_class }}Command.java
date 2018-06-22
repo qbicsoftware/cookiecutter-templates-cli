@@ -4,7 +4,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 /**
- * Abstraction of command-line arguments that will be passed to {@link {{ cookiecutter.main_class }}Service} at construction time.
+ * Abstraction of command-line arguments that will be passed to {@link {{ cookiecutter.main_class }}Tool} at construction time.
  */
 @Command(
    name="{{ cookiecutter.main_class }}",
@@ -16,4 +16,8 @@ public class {{ cookiecutter.main_class }}Command extends AbstractCommand {
     // String url;
     //
     // using package access level for these members will allow you access them within your main and test classes
+    //
+    // IMPORTANT: ToolExecutor requires that this class contains a public constructor that takes no arguments.
+    //            If you need a custom constructor, make sure to provide a no-arguments public constructor.
+    //            See: https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html
 }

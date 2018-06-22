@@ -5,10 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Implementation of {{ cookiecutter.display_name }}. Its command-line arguments are contained in instances of {@link {{ cookiecutter.main_class }}Command}.
- * 
- * I did not even bother to change this because I am too cool for school.
  */
-public class {{ cookiecutter.main_class }}Service extends AbstractTool<{{ cookiecutter.main_class }}Command> {
+public class {{ cookiecutter.main_class }}Service extends QBiCTool<{{ cookiecutter.main_class }}Command> {
 
     private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}.class);
 
@@ -17,18 +15,22 @@ public class {{ cookiecutter.main_class }}Service extends AbstractTool<{{ cookie
      * 
      * @param command an object that represents the parsed command-line arguments.
      */
-    public {{ cookiecutter.main_class }}Service(final {{ cookiecutter.main_class }}Command command) {
+    public {{ cookiecutter.main_class }}Tool(final {{ cookiecutter.main_class }}Command command) {
         super(command);
     }
 
     @Override
     public void execute() {
-        // TODO: implement this method.
+        // get the parsed command-line arguments
+        final {{ cookiecutter.main_class }}Command command = super.getCommand();
+
+        // TODO: do something useful with the obtained command.
         //
-        // There is no need to handle help/version commands, that's done by ToolExecutor.
-        // You can access command-line arguments using the 'command' super class member, e.g., 'super.command.[member_name]'
-        super.command;
+        
     }
 
-    // TODO: override the shutdown() method if you are implementing a daemon and want to take advantage of a shutdown hook for clean-up tasks
+    @Override
+    public void shutdown() {
+        // TODO: perform clean-up routines
+    }
 }

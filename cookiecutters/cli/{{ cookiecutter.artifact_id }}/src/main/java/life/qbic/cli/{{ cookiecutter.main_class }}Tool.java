@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
  * 
  * I did not even bother to change this because I am too cool for school.
  */
-public class {{ cookiecutter.main_class }}Tool extends AbstractTool<{{ cookiecutter.main_class }}Command> {
+public class {{ cookiecutter.main_class }}Tool extends QBiCTool<{{ cookiecutter.main_class }}Command> {
 
     private static final Logger LOG = LogManager.getLogger({{ cookiecutter.main_class }}.class);
 
