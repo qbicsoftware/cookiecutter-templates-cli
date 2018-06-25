@@ -3,10 +3,16 @@ package life.qbic.service;
 import life.qbic.cli.QBiCTool;
 import life.qbic.exceptions.ApplicationException;
 
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import fi.iki.elonen.NanoHTTPD;
+import fi.iki.elonen.NanoHTTPD.Response;
+import fi.iki.elonen.NanoHTTPD.IHTTPSession;
+
 
 /**
  * Implementation of Ping-Pong Service. Its command-line arguments are contained in instances of {@link PingPongCommand}.
@@ -16,7 +22,7 @@ public class PingPongService extends QBiCTool<PingPongCommand> {
     private static final Logger LOG = LogManager.getLogger(PingPongService.class);
 
     private volatile NanoHTTPD httpServer;
-    private final AtomicBoolean serverCreated;
+    private final AtomicBoolean serverStarted;
 
     /**
      * Constructor.
@@ -25,7 +31,7 @@ public class PingPongService extends QBiCTool<PingPongCommand> {
      */
     public PingPongService(final PingPongCommand command) {
         super(command);
-        serverCreated = new AtomicBoolean(false);
+        serverStarted = new AtomicBoolean(false);
     }
 
     @Override
@@ -33,14 +39,30 @@ public class PingPongService extends QBiCTool<PingPongCommand> {
         // get the parsed command-line arguments
         final PingPongCommand command = super.getCommand();
 
-        // TODO: do something useful with the obtained command.
-        //
+        httpServer = new NanoHTTPD(command.port) {
+            @Override
+            public Response serve(IHTTPSession session) {
+                return doServe(session);                
+            }};
+        try {
+			httpServer.start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+            serverStarted.set(true);
+            LOG.info("Listening in port {}", command.port);
+		} catch (IOException e) {
+			throw new ApplicationException(String.format("Could not start http server using port %d", command.port), e);
+		}
+    }
+
+    Response doServe(final IHTTPSession session) {
+        LOG.info("pinged");
+        return NanoHTTPD.newFixedLengthResponse("pong");
     }
 
     @Override
     public void shutdown() {
-        // TODO: perform clean-up tasks
-        // Important: do not call System.exit. This method is executed by a "shutdown hook thread"
-        //            See: https://docs.oracle.com/javase/8/docs/api/java/lang/Runtime.html#exit-int-
+        LOG.info("Shutting down");
+        if (serverStarted.get()) {
+            httpServer.stop();
+        }
     }
 }
