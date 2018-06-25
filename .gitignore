@@ -18,7 +18,7 @@
 target/
 
 # Misc
-bin/
+**/bin
 .cookiecutter_working_folder/
 
 # Ignore these kind of files on all folders, some editors seem to be too eager and create

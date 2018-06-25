@@ -4,9 +4,9 @@
     "artifact_id": "sample-portlet",
     "display_name": "Sample Portlet",
     "version": "1.0.0-SNAPSHOT",
-    "short_description": "Simple Vaadin sample portlet running on Liferay. Tests logger, openBIS connectivity, database connectivity.",
+    "short_description": "Vaadin Liferay portlet to...",
     "copyright_holder": "QBiC",
-    "main_class": "SamplePortletUI",
+    "main_class_prefix": "SamplePortletUI",
     "use_openbis_client": ["yes", "no"],
     "use_openbis_raw_api": ["yes", "no"],
     "use_qbic_databases": ["yes", "no"]

@@ -4,6 +4,6 @@
     "artifact_id": "sample-portal-lib",
     "display_name": "Sample Portal Library",
     "version": "1.0.0-SNAPSHOT",
-    "short_description": "Sample utility library using Liferay and Vaadin.",
+    "short_description": "Portal (Liferay + Vaadin) utilities...",
     "copyright_holder": "QBiC"
 }

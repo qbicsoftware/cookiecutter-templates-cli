@@ -39,9 +39,10 @@ def generate_cookiecutter_project(kwargs):
 def prepare_cookiecutter_template(kwargs):
     shutil.rmtree(WORKING_FOLDER, ignore_errors=True)
     copy_common_files_to_working_folder()
-    copy_cookiecutter_files_to_working_folder(os.path.join(COOKIECUTTERS_ROOT_FOLDER, kwargs.type))
+    rootFolder = COOKIECUTTERS_ROOT_FOLDER
     if kwargs.sample_code:
-        copy_cookiecutter_files_to_working_folder(os.path.join(SAMPLE_CODE_ROOT_FOLDER, kwargs.type))
+        rootFolder = SAMPLE_CODE_ROOT_FOLDER
+    copy_cookiecutter_files_to_working_folder(os.path.join(rootFolder, kwargs.type))
 
 # copies files from one of the cookiecutter folders (e.g., portal/portlet) to our working directory
 def copy_cookiecutter_files_to_working_folder(origin_folder):

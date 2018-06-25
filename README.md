@@ -166,7 +166,7 @@ display_name [Sample Portlet]: Donut Portlet
 version [1.0.0-SNAPSHOT]: 
 short_description [Will never portLET you go.]: Mmm donuts
 copyright_holder [QBiC]: Mr. Burns
-main_class [SamplePortletUI]: DonutPortletUI
+main_class_prefix [SamplePortletUI]: DonutPortletUI
 Select use_openbis_client:
 1 - yes
 2 - no
@@ -196,7 +196,7 @@ Let's first go through the meaning of each variable.
 * `copyright_holder`: talk to our lawyers about this one or simply use the provided default value. We are not allowed to explain this one anymore since the accident.
 
 #### Variables that apply only for portlets and command-line tools
-The `main_class` variable is used **only by `portlet` and `cli` projects**. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting, but it refers to the [simple name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of a class (i.e., `Sample` is the simple name of class whose fully qualified name is `foo.bar.Sample`):
+The `main_class_prefix` variable is used **only by `portlet` and `cli` projects**. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting, but it refers to the [simple name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of a class (i.e., `Sample` is the simple name of class whose fully qualified name is `foo.bar.Sample`):
 * In the case of portlets, this refers to the simple name of the class that extends the [`com.vaadin.ui.UI` class](https://vaadin.com/api/7.7.2/com/vaadin/ui/UI.html). All Tomcat, Liferay and Vaadin configuration files assume that your class belongs in the `life.qbic.portal.portlet` package. For new portlets, this should not be a problem, but if you are migrating a portlet and want to benefit from this tool, you must refactor your code to reflect this restriction.
 * For CLI tools this means the simple name of the class that contains your [`public static void main(String[] args)` method](https://docs.oracle.com/javase/tutorial/getStarted/application/index.html).
 
