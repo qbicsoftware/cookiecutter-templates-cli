@@ -9,7 +9,6 @@ from cookiecutter.cli import validate_extra_context
 COOKIECUTTERS_ROOT_FOLDER = 'cookiecutters'
 WORKING_FOLDER = '.cookiecutter_working_folder'
 COMMON_FILES_FOLDER = 'common-files'
-SAMPLE_CODE_ROOT_FOLDER = 'sample-code'
 DEFAULT_OUTPUT_DIR = 'generated'
 
 # parses arguments
@@ -19,8 +18,6 @@ def main():
         help='The type of artifact you want to generate (i.e., generic Java library, portal library, CLI tool or portlet).')
     parser.add_argument('--no-input', action='store_true', 
         help='If set, default values, as defined in the correspoing cookiecutter.json, will be used and no prompt will be displayed. There is one cookiecutter.json file associated with each type (e.g., cli/cookiecutter.json, portal/cookiecutter.json).')
-    parser.add_argument('-s', '--sample-code', action='store_true', dest="sample_code", 
-        help='Generate sample code instead of an empty project.')
     parser.add_argument('extra_context', metavar='extra_context', nargs='*', 
         help='List of variables/values that will override cookiecutter defaults (see cookiecutter documentation for a thorough explanation). Format: var1=val1 var2=val2 ... varN=valN.')
     parser.add_argument('-o', '--output-dir', default=DEFAULT_OUTPUT_DIR,
@@ -39,10 +36,7 @@ def generate_cookiecutter_project(kwargs):
 def prepare_cookiecutter_template(kwargs):
     shutil.rmtree(WORKING_FOLDER, ignore_errors=True)
     copy_common_files_to_working_folder()
-    rootFolder = COOKIECUTTERS_ROOT_FOLDER
-    if kwargs.sample_code:
-        rootFolder = SAMPLE_CODE_ROOT_FOLDER
-    copy_cookiecutter_files_to_working_folder(os.path.join(rootFolder, kwargs.type))
+    copy_cookiecutter_files_to_working_folder(os.path.join(COOKIECUTTERS_ROOT_FOLDER, kwargs.type))
 
 # copies files from one of the cookiecutter folders (e.g., portal/portlet) to our working directory
 def copy_cookiecutter_files_to_working_folder(origin_folder):

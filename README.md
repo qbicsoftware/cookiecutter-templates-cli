@@ -3,39 +3,39 @@
 
 ## Table of contents
 - [Cookiecutter templates CLI tool](#cookiecutter-templates-cli-tool)
-  * [Table of contents](#table-of-contents)
-  * [Motivation](#motivation)
-  * [Available templates](#available-templates)
-  * [Structure of this repository](#structure-of-this-repository)
-  * [Installing the required tools](#installing-the-required-tools)
-    + [1. Python](#1-python)
-    + [2. Java](#2-java)
-    + [3. Maven](#3-maven)
-    + [4. Other tools](#4-other-tools)
-  * [Making sure it all went fine](#making-sure-it-all-went-fine)
-  * [Usage](#usage)
-    + [Introduction](#introduction)
+  - [Table of contents](#table-of-contents)
+  - [Motivation](#motivation)
+  - [Available templates](#available-templates)
+  - [Structure of this repository](#structure-of-this-repository)
+  - [Installing the required tools](#installing-the-required-tools)
+    - [1. Python](#1-python)
+    - [2. Java](#2-java)
+    - [3. Maven](#3-maven)
+    - [4. Other tools](#4-other-tools)
+  - [Making sure it all went fine](#making-sure-it-all-went-fine)
+  - [Usage](#usage)
+    - [Introduction](#introduction)
       - [Global variables](#global-variables)
-      - [Variables that apply only for portlets and command-line tools](#variables-that-apply-only-for-portlets-and-command-line-tools)
+      - [Variables that apply for portlets, command-line tools, services and JavaFX stand-alone applications](#variables-that-apply-for-portlets-command-line-tools-services-and-javafx-stand-alone-applications)
       - [Variables that apply only for portlets](#variables-that-apply-only-for-portlets)
-    + [Location of generated code](#location-of-generated-code)
-    + [Change output folder](#change-output-folder)
-    + [Provide values without using prompts](#provide-values-without-using-prompts)
-    + [Provide values without editing `cookiecutter.json` files](#provide-values-without-editing--cookiecutterjson--files)
+    - [Location of generated code](#location-of-generated-code)
+    - [Change output folder](#change-output-folder)
+    - [Provide values without using prompts](#provide-values-without-using-prompts)
+    - [Provide values without editing `cookiecutter.json` files](#provide-values-without-editing-cookiecutterjson-files)
       - [1. Providing values via the command-line](#1-providing-values-via-the-command-line)
-      - [2. Providing values using a `.cookiecutterrc` file](#2-providing-values-using-a--cookiecutterrc--file)
-  * [Layout of the generated projects](#layout-of-the-generated-projects)
-  * [What to do once you've generated your project?](#what-to-do-once-you-ve-generated-your-project-)
-    + [Write tests, check code coverage](#write-tests--check-code-coverage)
-    + [Test your code locally](#test-your-code-locally)
+      - [2. Providing values using a `.cookiecutterrc` file](#2-providing-values-using-a-cookiecutterrc-file)
+  - [Layout of the generated projects](#layout-of-the-generated-projects)
+  - [What to do once you've generated your project?](#what-to-do-once-youve-generated-your-project)
+    - [Write tests, check code coverage](#write-tests-check-code-coverage)
+    - [Test your code locally](#test-your-code-locally)
       - [Testing a portlet locally using Jetty](#testing-a-portlet-locally-using-jetty)
       - [Testing CLI tools locally](#testing-cli-tools-locally)
-    + [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
-    + [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
-    + [Deploying your project as a Maven artifact](#deploying-your-project-as-a-maven-artifact)
-    + [Publishing your first version](#publishing-your-first-version)
-    + [Change default branch](#change-default-branch)
-    + [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci--optional-)
+    - [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
+    - [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
+    - [Deploying your project as a Maven artifact](#deploying-your-project-as-a-maven-artifact)
+    - [Publishing your first version](#publishing-your-first-version)
+    - [Change default branch](#change-default-branch)
+    - [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci-optional)
 
 ## Motivation
 There is a lot of boilerplate code associated to building Vaadin portlets for Liferay portals, so it makes sense to automate their creation by using templates. 
@@ -56,41 +56,44 @@ This is a simplified view of the structure of this repository:
 ```bash
 .
 ├── common-files
-│   
-└── cookiecutters
-    ├── cli
-    │   ├── {{ cookiecutter.artifact_id }}
-    │   │   ├── pom.xml
-    │   │   └── src
-    │   └── cookiecutter.json
-    ├── generic-lib
-    │   ├── {{ cookiecutter.artifact_id }}
-    │   │   ├── pom.xml
-    │   │   └── src
-    │   └── cookiecutter.json
-    ├── portal-lib
-    │   ├── {{ cookiecutter.artifact_id }}
-    │   │   ├── pom.xml
-    │   │   └── src
-    │   └── cookiecutter.json
-    └── portlet
-        ├── {{ cookiecutter.artifact_id }}
-        │   ├── pom.xml
-        │   └── src
-        └── cookiecutter.json
+│   └── {{ cookiecutter.artifact_id }}
+|
+├── cookiecutters
+│   ├── cli
+│   │   └── {{ cookiecutter.artifact_id }}
+│   ├── generic-lib
+│   │   └── {{ cookiecutter.artifact_id }}
+│   ├── gui
+│   │   └── {{ cookiecutter.artifact_id }}
+│   ├── portal-lib
+│   │   └── {{ cookiecutter.artifact_id }}
+│   ├── portlet
+│   │   └── {{ cookiecutter.artifact_id }}
+│   └── service
+│       └── {{ cookiecutter.artifact_id }}
+|
+├── sample-code
+│   ├── cli
+│   ├── generic-lib
+│   ├── gui
+│   ├── portal-lib
+│   ├── portlet
+│   └── service
  ```
 
 The first thing you will probably notice is the strange name, `{{ cookiecutter.artifact_id }}`, given to some folders. [Cookiecutter][cookiecutter] is able to dynamically resolve variables found in text files and file names. This is a great feature, because the name of the *root folder* of our projects should match the artifact ID, as defined in the `pom.xml` file. 
 
 Notice how each of available templates has its own sub-folder under `cookiecutters` (e.g., the `cookiecutters/generic-lib` folder contains code specific for generic Java libraries). However, since our projects have a few files in common, we have also created a `common-files` folder.
 
+The `sample-code` folder contains sample code for each type of supported project. Each sample was generated using these templates.
+
 ## Installing the required tools
 You will first need access to the [QBiC Software GitHub organization](https://github.com/qbicsoftware) so you can create your own GitHub repository and contribute to our codebase.
 
-There are a few development tools you will need to write portlets and other applications in QBiC. We use Java and [Maven][maven] for portal development. This tool, however, requires Python because it is based in [Cookiecutter][cookiecutter], which is a Python-based tool. In other words, to work on a portlet or other QBiC applications, you require only Java and [Maven][maven], but to automate the creation of new projects, you require Python.
+There are a few development tools you will need to write portlets and other applications in QBiC. We use Java and [Maven][maven] for development. This tool, however, requires Python because it is based in [Cookiecutter][cookiecutter], which is a Python-based tool. In other words, to work on a portlet or other QBiC applications, you require only Java and [Maven][maven], but to automate the creation of new projects, you require Python.
 
 ### 1. Python
-We use [Cookiecutter][cookiecutter], a Python-based tool to create new QBiC software projects using templates. We also maintain and develop a collection of Python tools for non-portal development (e.g., https://github.com/qbicsoftware/etl-scripts, https://github.com/qbicsoftware/barcode-creation). However, for standard QBiC portal projects, such as portlets, you need Python only to generate new projects. 
+We use [Cookiecutter][cookiecutter] to create new QBiC software projects using templates. We also maintain and develop a collection of Python tools for non-portal development (e.g., https://github.com/qbicsoftware/etl-scripts, https://github.com/qbicsoftware/barcode-creation). However, for standard QBiC portal projects, such as portlets, you need Python only to generate new projects. 
 
 We strongly recommend using the latest version of the [Conda][conda] package manager because we will soon release this and other QBiC tools as [Conda][conda] packages (see: https://github.com/qbicsoftware/cookiecutter-templates-cli/issues/7). 
 
@@ -102,7 +105,11 @@ conda create --channel conda-forge --name qbic cookiecutter python=3
 Your `qbic` environment will have the required dependencies (Python 3 and [Cookiecutter][cookiecutter]).
 
 ### 2. Java
-Our production and test instances use [OpenJDK 1.8](http://openjdk.java.net/). Installation of OpenJDK varies across operating systems. So it is strongly advised to read more about how to install OpenJDK in your operating system. Most Linux-based operating systems offer OpenJDK through package managers (e.g., `pacman`, `apt`, `yum`) and [there seems to be an OpenJDK version for Windows available](https://stackoverflow.com/questions/5991508/openjdk-availability-for-windows-os).
+Our production and test instances use [OpenJDK 1.8](http://openjdk.java.net/) and this is mirrored in our build system.
+
+Installation of OpenJDK varies across operating systems. So it is strongly advised to read more about how to install OpenJDK in your operating system. Most Linux-based operating systems offer OpenJDK through package managers (e.g., `pacman`, `apt`, `yum`) and [there seems to be an OpenJDK version for Windows available](https://stackoverflow.com/questions/5991508/openjdk-availability-for-windows-os).
+
+If you want to use Oracle's JDK, visit [Oracle's download page](http://www.oracle.com/technetwork/java/javase/downloads/index.html) to get the binaries.
 
 Make sure you install a Java development kit (JDK) and not a Java runtime environment (JRE). 
 
@@ -150,7 +157,7 @@ To generate a specific template, use the `-t`/`--type` parameter:
 ./generate.py --type <type>
 ```
 
-Supported types are `portlet`, `cli`, `portal-lib` and `generic-lib`, so if you want to generate a Vaadin portlet for Liferay, you would run the following command:
+Supported types are `portlet`, `cli`, `portal-lib`, `generic-lib`, `service` and `gui`, so if you want to generate a Vaadin portlet for Liferay, you would run the following command:
 
 ```bash
 ./generate.py --type portlet
@@ -160,25 +167,11 @@ Regardless of which template type you are using, you will immediately see that y
 
 ```bash
 author [Winnie Pooh]: Homer Simpson
-email [winnie.the.pooh@qbic.uni-tuebingen.de]: simpson@burns.com
+email [winnie.the.pooh@honey.uni-tuebingen.de]: simpson@burns.com
 artifact_id [sample-portlet]: donut-portlet
 display_name [Sample Portlet]: Donut Portlet
 version [1.0.0-SNAPSHOT]: 
-short_description [Will never portLET you go.]: Mmm donuts
-copyright_holder [QBiC]: Mr. Burns
-main_class_prefix [SamplePortletUI]: DonutPortletUI
-Select use_openbis_client:
-1 - yes
-2 - no
-Choose from 1, 2 [1]: 1
-Select use_openbis_raw_api:
-1 - yes
-2 - no
-Choose from 1, 2 [1]: 2
-Select use_qbic_databases:
-1 - yes
-2 - no
-Choose from 1, 2 [1]: 1
+...
 ```
 
 The values shown between brackets are the defaults. To use the default value (as Homer did here for `version`), simply press `ENTER` without entering any other text. Default values are found in `cookiecutter.json` files (there's one for each template type) and in [Cookiecutter's configuration file](http://cookiecutter.readthedocs.io/en/latest/advanced/user_config.html).
@@ -195,10 +188,32 @@ Let's first go through the meaning of each variable.
 * `short_description`: a short set of words that, when put together in a sentence, explain what your project does. You know, _short description_ of your project.
 * `copyright_holder`: talk to our lawyers about this one or simply use the provided default value. We are not allowed to explain this one anymore since the accident.
 
-#### Variables that apply only for portlets and command-line tools
-The `main_class_prefix` variable is used **only by `portlet` and `cli` projects**. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. The value of this variable depends on what kind of project you are developing/porting, but it refers to the [simple name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of a class (i.e., `Sample` is the simple name of class whose fully qualified name is `foo.bar.Sample`):
-* In the case of portlets, this refers to the simple name of the class that extends the [`com.vaadin.ui.UI` class](https://vaadin.com/api/7.7.2/com/vaadin/ui/UI.html). All Tomcat, Liferay and Vaadin configuration files assume that your class belongs in the `life.qbic.portal.portlet` package. For new portlets, this should not be a problem, but if you are migrating a portlet and want to benefit from this tool, you must refactor your code to reflect this restriction.
-* For CLI tools this means the simple name of the class that contains your [`public static void main(String[] args)` method](https://docs.oracle.com/javase/tutorial/getStarted/application/index.html).
+#### Variables that apply for portlets, command-line tools, services and JavaFX stand-alone applications
+The `main_class_prefix` variable is used **only by `portlet`, `cli`, `service` and `gui` projects**. This kind of projects require a so-called "main (Java) class" with which a framework or a user interacts. 
+
+The value of this variable depends on what kind of project you are developing/porting, but it refers to the [simple name](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--) of a class (i.e., `Sample` would is the simple name of a class whose name is `foo.bar.Sample`). 
+
+If you look into the cookiecutters folder, you will see that there are some template Java files with the following naming schema:
+
+| Project Type  | Template Filenames
+|:------------- |:---------------    
+| `portlet`      | `...Portlet.java`      
+| `cli`           | `...Command.java`<br/>`...EntryPoint.java`<br/>`...Tool.java` 
+| `service`       | `...Command.java`<br/>`...EntryPoint.java`<br/>`...Service.java` 
+| `gui`           | `...Command.java`<br/>`...EntryPoint.java`<br/>`...Application.java`
+
+This is to have some sort of consistency across all projects. The best way to understand this variable is by providing an example. If you set `NewsGenerator` as the value for `main_class_prefix`, you can expect the following results:
+
+| Project Type  | Generated Filenames
+|:------------- |:---------------    
+| `portlet`       | `NewsGeneratorPortlet.java`      
+| `cli`           | `NewsGeneratorCommand.java`<br/>`NewsGeneratorEntryPoint.java`<br/>`NewsGeneratorTool.java` 
+| `service`       | `NewsGeneratorCommand.java`<br/>`NewsGeneratorEntryPoint.java`<br/>`NewsGeneratorService.java` 
+| `gui`           | `NewsGeneratorCommand.java`<br/>`NewsGeneratorEntryPoint.java`<br/>`NewsGeneratorApplication.java`
+
+There would be no point, for instance, in having a portlet's main class called `NewsGeneratorPortletPortlet`. No one likes to repeat stuff. I say, no one likes to repeat stuff.
+
+To get a better understanding of the purpose of each generated file, feel free to browse the `sample-code` folder.
 
 #### Variables that apply only for portlets
 By now, you might have realized that even the simplest portlet requires several configuration files and a cup of coffee. Trying to figure out why your portlet is not deploying or what exactly a configuration file is missing are tasks where developers' time is simply wasted. So we naturally put a lot of effort in first automating portlet generation. This is why the sample portlet that this tool generates is by far the most complex: you can even configure its "sample functionality". The following variables **apply only to portlets**:
