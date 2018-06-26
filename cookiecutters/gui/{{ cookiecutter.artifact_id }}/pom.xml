@@ -46,16 +46,12 @@
 	</repositories>
 
 	<dependencies>
-		<!-- arg parsing -->
-		<dependency>
-			<groupId>info.picocli</groupId>
-			<artifactId>picocli</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>life.qbic</groupId>
 			<artifactId>javafx-utils-lib</artifactId>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
