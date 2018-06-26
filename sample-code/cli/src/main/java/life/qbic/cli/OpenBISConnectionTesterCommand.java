@@ -14,15 +14,15 @@ public class OpenBISConnectionTesterCommand extends AbstractCommand {
      * openBIS server URL.
      */
     @Option(names={"-u", "--url"}, description="openBIS server URL.", required=true)
-    public String url;
+    String url;
     /**
      * Username.
      */
     @Option(names={"-n", "--username"}, description="openBIS username.", required=true)
-    public String userName;
+    String userName;
     /**
      * Password.
      */
     @Option(names={"-p", "--pass"}, description="openBIS password.", required=true)
-    public String password;
+    String password;
 }
