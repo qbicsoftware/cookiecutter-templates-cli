@@ -6,12 +6,9 @@ import org.junit.Test;
  * Unit tests for PingPongService.
  */
 public class PingPongServiceTest  {
-    @Test
-    public void testWithInvalidPortNumber() {
-    }
+    // TODO: write unit tests (you do not need to test JavaFXExecutor, just test start(Stage) method of your application)
 
     @Test
-    public void testAllRepliesArePongs() {
+    public void testToolDoesNotOpenPandorasBox() {
     }
-
 }
