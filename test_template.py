@@ -15,4 +15,3 @@ def test_common_files_were_copied():
     assert(exists(join(FOLDER_NAME, 'CODE_OF_CONDUCT.md')))
     assert(exists(join(FOLDER_NAME, 'LICENSE')))
     assert(exists(join(FOLDER_NAME, 'README.md')))
-    assert(exists(join(FOLDER_NAME, 'src', 'main', 'resources', 'log4j2.xml')))
