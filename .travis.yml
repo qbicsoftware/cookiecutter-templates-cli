@@ -39,7 +39,7 @@ env:
 
 # javafx
 before_script: if [ "$TYPE" = "gui" ]; then
-                 jdk_switcher use oraclejdk8
+                 jdk_switcher use oraclejdk8;
                fi
 
 script: rm -Rf template-test && 
