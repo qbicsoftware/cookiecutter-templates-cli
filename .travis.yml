@@ -26,6 +26,8 @@ env:
   - TYPE=cli           USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
   - TYPE=generic-lib   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
   - TYPE=portal-lib    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=service       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=gui           USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
   - TYPE=portlet       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
   - TYPE=portlet       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
   - TYPE=portlet       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
@@ -34,6 +36,11 @@ env:
   - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
   - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
   - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+
+# javafx
+before_script: if [ "$TYPE" = "gui" ]; then
+                 jdk_switcher use oraclejdk8;
+               fi
 
 script: rm -Rf template-test && 
         ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&

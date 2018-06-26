@@ -44,23 +44,8 @@
 			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
 		</repository>
 	</repositories>
-	<!-- 
-		To avoid inconsistencies across projects, plase check which librares are already 
-		contained before adding new ones under <dependencies>.
-      
-		You can use the following maven command to generate a dependency tree and list all
-		maven artifacts (libraries) that are available:
 
-			$ mvn dependency:tree
-
-		Check your IDE's documentation to display maven's dependency tree.
-	-->
 	<dependencies>
-		<!-- replaces liferayandvaadinutils (version defined in parent POM) -->
-		<dependency>
-			<groupId>life.qbic</groupId>
-			<artifactId>portal-utils-lib</artifactId>
-		</dependency>
 		{% if cookiecutter.use_openbis_client == "yes" %}		
 		<!-- openBIS client (version defined in parent POM) -->
 		<dependency>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>life.qbic</groupId>
+		<artifactId>portal-parent-pom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<groupId>life.qbic</groupId>
+	<!-- not using 'portal-utils-lib' as artifactId to avoid any possible name clash with the real portal-utils-lib -->
+	<artifactId>sample-portal-utils-lib</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Sample Portal Utilities Library</name>
+	<url>http://github.com/qbicsoftware/portal-utils-lib</url>
+	<description>Java utilities related to Liferay portals and Vaadin.</description>
+	<packaging>jar</packaging>
+	<!-- we only need to tell maven where to find our parent pom and other QBiC dependencies -->
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<id>nexus-snapshots</id>
+			<name>QBiC Snapshots</name>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>nexus-releases</id>
+			<name>QBiC Releases</name>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+      		<groupId>org.apache.commons</groupId>
+      		<artifactId>commons-lang3</artifactId>
+    	</dependency>
+	</dependencies>
+</project>
