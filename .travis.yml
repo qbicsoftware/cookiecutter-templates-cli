@@ -69,7 +69,7 @@ jobs:
     - stage: "Code Coverage"
       # generate only one code coverage report
       python: "3.6"
-      env: TYPE=portlet USE_OPENBIS_RAW_API=yes USE_OPENBIS_CLIENT=yes USE_QBIC_DATABASES=yes
+      env: TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
       script: rm -Rf template-test && 
               ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_CLIENT use_qbic_databases=$USE_QBIC_DATABASES &&
               pytest --cov=./ &&
