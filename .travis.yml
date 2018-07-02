@@ -49,7 +49,7 @@ before_script: if [ "$TYPE" = "gui" ]; then
                   jdk_switcher use oraclejdk8;
                fi;
                if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
-                  echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license
+                  echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
                fi;
 
 script: rm -Rf template-test && 
