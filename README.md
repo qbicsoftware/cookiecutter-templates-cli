@@ -16,7 +16,6 @@
     + [Avoid using prompts](#avoid-using-prompts)
     + [Location of generated code](#location-of-generated-code)
     + [Change output folder](#change-output-folder)
-  * [What to do once you've generated your project?](#what-to-do-once-you-ve-generated-your-project-)
 
 ## Motivation
 There is a lot of boilerplate code associated to building Vaadin portlets for Liferay portals, so it makes sense to automate their creation by using templates. 
