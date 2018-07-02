@@ -9,5 +9,6 @@
     "main_class_prefix": "Sample",
     "use_openbis_client": ["yes", "no"],
     "use_openbis_raw_api": ["yes", "no"],
-    "use_qbic_databases": ["yes", "no"]
+    "use_qbic_databases": ["yes", "no"],
+    "use_vaadin_charts": ["yes", "no"]
 }
