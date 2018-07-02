@@ -3,7 +3,7 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>{{ cookiecutter.artifact_id }}</portlet-name>
+		<portlet-name>${project.artifactId}</portlet-name>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

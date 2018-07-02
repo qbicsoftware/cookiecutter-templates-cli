@@ -8,7 +8,7 @@
 
 	<portlet>
 		<description>{{ cookiecutter.short_description }}</description>
-		<portlet-name>{{ cookiecutter.artifact_id }}</portlet-name>
+		<portlet-name>${project.artifactId}</portlet-name>
 		<display-name>{{ cookiecutter.display_name }}</display-name>
 
 		<portlet-class>com.vaadin.server.VaadinPortlet</portlet-class>
