@@ -89,6 +89,7 @@ By now, you might have realized that even the simplest portlet requires several 
 * `use_openbis_client`: whether your portlet will interact with openBIS through our [openBIS client](https://github.com/qbicsoftware/openbis-client-lib).
 * `use_openbis_raw_api`: if you are accessing openBIS _by the book_, then you probably know what you are doing, so this one needs no further explanation.
 * `use_qbic_databases`: for now, we define two kinds of databases: openBIS and the rest. This is _the rest_. If your portlet uses a custom database outside openBIS, you probably need this.
+* `use_vaadin_charts`: we bought a license to include [Vaadin Charts](https://vaadin.com/directory/component/vaadin-charts) components in our portlets. Make sure that you [include the license code](https://github.com/qbicsoftware/cookiecutter-templates-cli/blob/development/README_DEVELOPMENT.md#using-vaadin-charts-add-on-in-your-portlet) in your `.travis.yml` file.
 
 ## Layout of the generated projects
 `generate.py` will generate a folder which you can immediately use for development. The contents differ across template types. Here, for the sake of clarity, we will keep using our sample project, `donut-portlet`. Portlets are, by far, the most intricate project types because there are many files you have to configure properly so your portlet can be deployed. Have a look at the generated structure:
