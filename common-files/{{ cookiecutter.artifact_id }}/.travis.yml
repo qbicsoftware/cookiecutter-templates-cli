@@ -26,6 +26,11 @@ before_install: unset _JAVA_OPTIONS
 # speed up builds by telling Travis that we don't need any special "installation"
 install: true
 
+# check if we need to add a license file for Vaadin charts
+before_script: if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
+                  echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
+               fi;
+               
 # as agreed in our SOP, build everything (don't deploy, just try to 'mvn install' locally, which covers all phases)
 script: mvn --quiet --activate-profiles !development-build,!release-build --settings .travis.settings.xml clean cobertura:cobertura install
 # upload code coverage report, generate maven site (javadocs, documentation, static code analysis, etc.)
