@@ -1,8 +1,5 @@
 language: python
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
   - "3.6"  
 sudo: false
 
@@ -23,27 +20,41 @@ install:
   - pip install -r pip_requirements.txt
 
 env:
-  - TYPE=cli           USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
-  - TYPE=generic-lib   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
-  - TYPE=portal-lib    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
-  - TYPE=service       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
-  - TYPE=gui           USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
-  - TYPE=portlet       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
-  - TYPE=portlet       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
-  - TYPE=portlet       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
-  - TYPE=portlet       USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
-  - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
-  - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
-  - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
-  - TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  matrix:
+  - TYPE=cli           USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=generic-lib   USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portal-lib    USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=service       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=gui           USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no   
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  global:
+    - secure: "nM053GNRZmle7ecKsdQAygLP35vmU6Zh2MKl9ZRorhDX4SlED4t3swvDS/bXtTGM8QBxRqHcHduiZF7JarE4CfYy8lQoEG0rObS6ULL7DYeClsQpHkG4wtxF4P5YHjVBlAO8//uJqFTPhsdH2bI+ewUeAg/sYKUcOW8jmktY96XTQa7O97z2CJbzyWw7JIHyyTJ0YT4UwG0kyN3lfmzx7fKuO4LkjgDX8d8VSTByMpOSxChPCqGcc55beeIvRNUbaMOS5KLCgFqgbvfmvc1pNgvUbsY0BZA2P1br2p1u79wKmjt8Pw4uTB+vD1yCeNFfu6XTqO5iRRksFekpjyoibfOQgd/9qQ6PuPm5UD4AhpZ32NoN2qCOeXg0cCywyVNZbZQ4qEZNgNXjkzruzAPQDN3zYV7rI7sIyvAGIHgsYEvGJEpvykPKfdV1CbJA2I5EhbJWRwDe2VERq1+Ah4eo49oxXL/1SmCo77MCvbT2/Ai3CPaY+Mu1wyN6GbRagD492cW/xJjIGImsMGhlgOPkSKuIJ1hvw5gMGsut/cnYvAK8aciXBJh7I1md3bRaINagb+SB+POHD0f9n5yJDnd0y+i4yXZQ8GBYjLpaKU1XoKkzN8h4rPb+GxSIQbBaFPcE8ZXJEYPOKDTc6m4T1hbuA94AWSH13JGldcChBHXRwaU="
 
 # javafx
 before_script: if [ "$TYPE" = "gui" ]; then
-                 jdk_switcher use oraclejdk8;
-               fi
+                  jdk_switcher use oraclejdk8;
+               fi;
+               if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
+                  echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
+               fi;
 
 script: rm -Rf template-test && 
-        ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&
+        ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&
         pytest --cov=./ &&
         mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
 
@@ -52,16 +63,16 @@ matrix:
   exclude:
     - python: "3.6"
       # this value must match EXACTLY as defined, including whitespace between elements!
-      env: TYPE=portlet       USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+      env: TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
 
 jobs:
   include:
     - stage: "Code Coverage"
       # generate only one code coverage report
       python: "3.6"
-      env: TYPE=portlet USE_OPENBIS_RAW_API=yes USE_OPENBIS_CLIENT=yes USE_QBIC_DATABASES=yes
+      env: TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
       script: rm -Rf template-test && 
-              ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_CLIENT use_qbic_databases=$USE_QBIC_DATABASES &&
+              ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_CLIENT use_qbic_databases=$USE_QBIC_DATABASES &&
               pytest --cov=./ &&
               mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
       after_success:
@@ -71,3 +82,4 @@ notifications:
   email:
     on_success: never
     on_failure: never
+  

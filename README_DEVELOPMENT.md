@@ -1,26 +1,28 @@
 # Unofficial development guide
 
 ## Table of contents
-  * [Required tools for Java development](#required-tools-for-java-development)
-    + [1. Java](#1-java)
-    + [2. Maven](#2-maven)
-    + [3. Other tools](#3-other-tools)
-  * [Template variables](#template-variables)
-    + [Global variables](#global-variables)
-    + [Variables that apply for portlets, command-line tools, services and JavaFX stand-alone applications](#variables-that-apply-for-portlets--command-line-tools--services-and-javafx-stand-alone-applications)
-    + [Variables that apply only for portlets](#variables-that-apply-only-for-portlets)
-  * [Layout of the generated projects](#layout-of-the-generated-projects)
-  * [What to do once you've generated your project?](#what-to-do-once-you-ve-generated-your-project-)
-    + [Write tests, check code coverage](#write-tests--check-code-coverage)
-    + [Test your code locally](#test-your-code-locally)
+  - [Required tools for Java development](#required-tools-for-java-development)
+    - [1. Java](#1-java)
+    - [2. Maven](#2-maven)
+    - [3. Other tools](#3-other-tools)
+  - [Template variables](#template-variables)
+    - [Global variables](#global-variables)
+    - [Variables that apply for portlets, command-line tools, services and JavaFX stand-alone applications](#variables-that-apply-for-portlets-command-line-tools-services-and-javafx-stand-alone-applications)
+    - [Variables that apply only for portlets](#variables-that-apply-only-for-portlets)
+  - [Layout of the generated projects](#layout-of-the-generated-projects)
+  - [What to do once you've generated your project?](#what-to-do-once-youve-generated-your-project)
+    - [Write tests, check code coverage](#write-tests-check-code-coverage)
+    - [Test your code locally](#test-your-code-locally)
       - [Testing a portlet locally using Jetty](#testing-a-portlet-locally-using-jetty)
       - [Testing other tools locally](#testing-other-tools-locally)
-    + [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
-    + [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
-    + [Deploy your project as a Maven artifact](#deploy-your-project-as-a-maven-artifact)
-    + [Publish your first version](#publish-your-first-version)
-    + [Change default branch](#change-default-branch)
-    + [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci--optional-)
+    - [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
+    - [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
+    - [Provide encrypted information to Travis CI](#provide-encrypted-information-to-travis-ci)
+      - [Maven credentials](#maven-credentials)
+      - [Using Vaadin Charts add-on in your portlet](#using-vaadin-charts-add-on-in-your-portlet)
+    - [Publish your first version](#publish-your-first-version)
+    - [Change default branch](#change-default-branch)
+    - [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci-optional)
 
 ## Required tools for Java development
 ### 1. Java
@@ -231,15 +233,22 @@ If you see the settings page, then it means that everything went fine. Make sure
 
 ![travis-repo-settings](images/travis-repo-settings.png)
 
+### Provide encrypted information to Travis CI
+Any person on the internet can download [Maven][maven] artifacts from our [public Maven repository](https://qbic-repo.am10.uni-tuebingen.de). But in order to upload artifacts to our repository, you will need proper authentication. 
 
-### Deploy your project as a Maven artifact
-Any person on the internet can download [Maven][maven] artifacts from our [public Maven repository](https://qbic-repo.am10.uni-tuebingen.de). But in order to upload artifacts to our repository, you will need proper authentication. Since our code is also publicly available, we cannot simply write those credentials in clear text.
+Since all of our code is open source, it would not be a good idea to use cleartext passwords and distribute them in our repositories. This is also true for other private information such as license codes. However, [Travis CI][travis] requires this same information to be present at build time. Luckily, [Travis CI][travis] offers [a simple way to add encrypted environment variables](https://docs.travis-ci.com/user/encryption-keys/). You do not need to fully understand the implementation details to follow this guide, but no one will be angry at you if you do. 
 
-Luckily, [Travis CI][travis] offers [a simple way to securely share our credentials](https://docs.travis-ci.com/user/encryption-keys/). You do not need to fully understand the implementation details to follow this guide, but no one will be angry at you if you do. 
+You only need to execute a single command using [the Travis CI console][travis-console] to add an encrypted variable to your `.travis.yml`. Let's say, for instance, that you need to add an environment variable, `NUCLEAR_REACTOR_RELEASE_CODE` whose value is `d0nut5_Ar3_t4sty`. You would have to use the following command:
 
-You will need to execute a few commands to add the encrypted credentials of our repository to `.travis.yml`. In your local GitHub repository folder (i.e., `donut-portlet`) login using [the Travis CI console][travis-console] (you will be asked for your GitHub username and password):
+```bash
+travis encrypt "NUCLEAR_REACTOR_RELEASE_CODE=d0nut5_Ar3_t4sty" --add env.global --pro
+```
 
-Add the encrypted credentials by executing the following commands via [the Travis CI console][travis-console]. These commands will automatically edit `.travis.yml` (if you want edit the file yourself, do not use the `--add env.global` parameter): 
+This command will automatically edit `.travis.yml` (if you want edit the file yourself, do not use the `--add env.global` parameter).
+
+
+#### Maven credentials
+To enable [Maven][maven] deployments in [Travis CI][travis], add both `MAVEN_REPO_USERNAME` and `MAVEN_REPO_PASSWORD` as encrypted variables in your `.travis.yml` file like so:
 
 ```bash
 travis encrypt "MAVEN_REPO_USERNAME=<username>" --add env.global --pro
@@ -247,6 +256,15 @@ travis encrypt "MAVEN_REPO_PASSWORD=<password>" --add env.global --pro
 ```
 
 Ask the people who wrote this guide about the proper values of `<username>` and `<password>`. Encrypted values in [Travis CI][travis] are bound to their GitHub repository, so you cannot simply copy them from other repositories.
+
+#### Using Vaadin Charts add-on in your portlet
+This add-on requires you to have a proper license code. If your portlet requires this add-on, add the `VADIN_CHARTS_LICENSE_CODE` as an encrypted variable in `.travis.yml`:
+
+```bash
+travis encrypt "VAADIN_CHARTS_LICENSE_CODE=<license-code>" --add env.global --pro
+```
+
+Ask around for the license code.
 
 ### Publish your first version
 In your local GitHub repository directory (i.e., `donut-portlet`) run the following commands:

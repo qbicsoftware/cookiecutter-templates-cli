@@ -69,5 +69,12 @@
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
 		{% endif %}
+		{% if cookiecutter.use_vaadin_charts == "yes" %}
+		<!-- Vaadin charts -->
+		<dependency>
+  			<groupId>com.vaadin.addon</groupId>
+  			<artifactId>vaadin-charts</artifactId>
+		</dependency>
+		{% endif %}
 	</dependencies>
 </project>
