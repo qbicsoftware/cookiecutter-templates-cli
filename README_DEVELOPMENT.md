@@ -141,11 +141,11 @@ In oder to understand more about the process of creating projects from templates
 `generate.py` creates just a sample project. Sadly, you will still have to write your own code, tests and documentation.
 
 ### Write tests, check code coverage
-The generated folder already contains simple [jUnit](junit) unit tests (i.e., in `src/test/java/life/qbic/portal/portlet/DonutPortletUITest.java`). Writing code that tests your code is an important part of the development lifecycle (see: https://makeameme.org/meme/Yo-dawg-I-wgn8jg).
+The generated folder already contains simple [jUnit](junit) unit tests (i.e., in `src/test/java/life/qbic/portal/portlet/DonutPortletTest.java`). Writing code that tests your code is an important part of the development lifecycle (see: https://makeameme.org/meme/Yo-dawg-I-wgn8jg).
 
 As a general guideline, try to code the _logic_ of your portlet independent of the user interface so you can easily write code that tests your portlet.
 
-[Maven][maven] has been configured to execute unit tests under the `src/test` folder that match the _*Test_ name (e.g., `DonutPortletUITest`). To run all unit tests, you use the following command:
+[Maven][maven] has been configured to execute unit tests under the `src/test` folder that match the _*Test_ name (e.g., `DonutPortletTest`). To run all unit tests, you use the following command:
 
 ```bash
 mvn test
@@ -157,7 +157,7 @@ We use [Cobertura](http://cobertura.github.io/cobertura/) to generate [coverage 
 mvn cobertura:cobertura
 ```
 
-Similarly, we have configured the [Maven][maven] plug-ins to run integration tests. These tests are also under the `src/test` folder, but their names must end with _*IntegrationTest_, such as `DonutPortletUIIntegrationTest`.
+Similarly, we have configured the [Maven][maven] plug-ins to run integration tests. These tests are also under the `src/test` folder, but their names must end with _*IntegrationTest_, such as `DonutPortletIntegrationTest`.
 
 ### Test your code locally
 You can easily run the unit and integration tests for libraries you have written by using the `mvn test` command. This is, more or less, what our build system does. Take a look at the `.travis.yml` file located in the `common-files` if you want to know all implementation details related to how we do continuous integration.
