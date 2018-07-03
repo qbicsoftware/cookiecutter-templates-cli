@@ -12,7 +12,7 @@
 
 	<display-name>{{ cookiecutter.display_name }}</display-name>
 	<servlet>
-		<servlet-name>{{ cookiecutter.artifact_id }}</servlet-name>
+		<servlet-name>${project.artifactId}</servlet-name>
 		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
 
 		<init-param>
@@ -23,7 +23,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>{{ cookiecutter.artifact_id }}</servlet-name>
+		<servlet-name>${project.artifactId}</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 </web-app>

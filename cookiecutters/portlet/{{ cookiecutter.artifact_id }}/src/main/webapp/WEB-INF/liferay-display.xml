@@ -3,6 +3,6 @@
 
 <display>
 	<category name="QBiC Portlets">
-		<portlet id="{{ cookiecutter.artifact_id }}" />
+		<portlet id="${project.artifactId}" />
 	</category>
 </display>
