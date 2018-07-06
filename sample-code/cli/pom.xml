@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>life.qbic</groupId>
 		<artifactId>cli-parent-pom</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.1.2</version>
 	</parent>
 	<groupId>life.qbic</groupId>
 	<artifactId>openbis-tester-cli</artifactId>
@@ -48,7 +48,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>life.qbic</groupId>
+			<artifactId>core-utils-lib</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>life.qbic</groupId>
 			<artifactId>openbis-client-lib</artifactId>
+			<version>1.1.4</version>
 		</dependency>
 	</dependencies>
 

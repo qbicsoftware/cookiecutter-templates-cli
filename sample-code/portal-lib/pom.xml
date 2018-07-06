@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>life.qbic</groupId>
 		<artifactId>portal-parent-pom</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.1.2</version>
 	</parent>
 	<groupId>life.qbic</groupId>
 	<!-- not using 'portal-utils-lib' as artifactId to avoid any possible name clash with the real portal-utils-lib -->
