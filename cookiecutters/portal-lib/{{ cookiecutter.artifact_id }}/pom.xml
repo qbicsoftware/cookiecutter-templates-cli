@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>life.qbic</groupId>
 		<artifactId>portal-parent-pom</artifactId>
-		<version>1.1.2</version>
+		<version>1.2.0-SNAPSHOT</version>
 	</parent>
 	<groupId>life.qbic</groupId>
 	<artifactId>{{ cookiecutter.artifact_id }}</artifactId>
