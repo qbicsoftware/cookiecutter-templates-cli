@@ -13,9 +13,13 @@ branches:
     - master
     - development
 
+# we are using python, but we still need maven to test the generated projects
+addons:
+  apt:
+    packages:
+    - maven
+
 install: 
-  - sudo apt-get -qq update
-  - sudo apt-get install maven
   - pip install -U pip wheel
   - pip install -r pip_requirements.txt
 
