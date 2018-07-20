@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Entry point for portlet {{ cookiecutter.artifact_id }}. This class derives from {@link QBiCPortletUI}, which is found in the {@code portal-utils-lib} library.
  * 
- * @see https://github.com/qbicsoftware/portal-utils-lib
+ * @see <a href=https://github.com/qbicsoftware/portal-utils-lib>portal-utils-lib</a>
  */
 @Theme("mytheme")
 @SuppressWarnings("serial")
