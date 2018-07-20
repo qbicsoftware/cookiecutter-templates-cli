@@ -57,7 +57,7 @@
 			<version>1.0.0</version>
 		</dependency>
 		{% if cookiecutter.use_openbis_client == "yes" %}		
-		<!-- openBIS client (version defined in parent POM) -->
+		<!-- openBIS client -->
 		<dependency>
 			<groupId>life.qbic</groupId>
 			<artifactId>openbis-client-lib</artifactId>
@@ -65,12 +65,12 @@
 		</dependency>
 		{% endif %}
 		{% if cookiecutter.use_openbis_raw_api == "yes" %}		
-		<!-- openBIS API (version defined in parent POM) -->
+		<!-- openBIS API -->
 		<dependency>
-        	<groupId>life.qbic.openbis</groupId>
-            <artifactId>openbis_api</artifactId>
+        		<groupId>life.qbic.openbis</groupId>
+            		<artifactId>openbis_api</artifactId>
 			<version>3-S253.0</version>
-        </dependency>
+        	</dependency>
 		{% endif %}
 		{% if cookiecutter.use_qbic_databases == "yes" %}
 		<!-- Access to our custom databases (portlets use direct JDBC to access data for now),
@@ -82,7 +82,7 @@
 		</dependency>
 		{% endif %}
 		{% if cookiecutter.use_vaadin_charts == "yes" %}
-		<!-- Vaadin charts -->
+		<!-- Vaadin charts (version defined in parent pom) -->
 		<dependency>
   			<groupId>com.vaadin.addon</groupId>
   			<artifactId>vaadin-charts</artifactId>
