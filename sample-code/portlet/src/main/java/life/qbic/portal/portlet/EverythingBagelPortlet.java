@@ -35,7 +35,7 @@ import life.qbic.portal.Styles.NotificationType;
 /**
  * Entry point for portlet everything-bagel-portlet. This class derives from {@link QBiCPortletUI}, which is found in the {@code portal-utils-lib} library.
  * 
- * @see https://github.com/qbicsoftware/portal-utils-lib
+ * @see <a href="https://github.com/qbicsoftware/portal-utils-lib">portal-utils-lib</a>
  */
 @Theme("mytheme")
 @SuppressWarnings("serial")
