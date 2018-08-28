@@ -7,9 +7,9 @@
 	version="2.0">
 
 	<portlet>
-		<description>{{ cookiecutter.short_description }}</description>
+		<description>${project.description}</description>
 		<portlet-name>${project.artifactId}</portlet-name>
-		<display-name>{{ cookiecutter.display_name }}</display-name>
+		<display-name>${project.name}</display-name>
 
 		<portlet-class>com.vaadin.server.VaadinPortlet</portlet-class>
 
@@ -30,8 +30,8 @@
 
 
 		<portlet-info>
-			<title>{{ cookiecutter.display_name }}</title>
-			<short-title>{{ cookiecutter.short_description }}</short-title>
+			<title>${project.name}</title>
+			<short-title>${project.description}</short-title>
 			<keywords>Vaadin 7, QBiC, Big Data, Bioinformatics</keywords>
 		</portlet-info>
 

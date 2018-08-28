@@ -10,7 +10,7 @@
   		<param-value>true</param-value>
 	</context-param>
 
-	<display-name>{{ cookiecutter.display_name }}</display-name>
+	<display-name>${project.name}</display-name>
 	<servlet>
 		<servlet-name>${project.artifactId}</servlet-name>
 		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
