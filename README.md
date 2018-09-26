@@ -9,7 +9,7 @@
     + [Conda](#conda)
   * [Making sure it all went fine](#making-sure-it-all-went-fine)
   * [Usage](#usage)
-    + [Generating a new proejct](#generating-a-new-proejct)
+    + [Generating a new project](#generating-a-new-project)
     + [How to change default values](#how-to-change-default-values)
       - [1. Providing defaults using a `.cookiecutterrc` file](#1-providing-defaults-using-a--cookiecutterrc--file)
       - [2. Providing defaults via the command-line](#2-providing-defaults-via-the-command-line)
@@ -117,7 +117,7 @@ python generate.py --help
 `generate.py` helps you automate the task of creating a new project. It is located at the root folder of this repository. 
 
 ## Usage
-### Generating a new proejct
+### Generating a new project
 To generate a specific template, use the `-t`/`--type` parameter:
 
 ```bash
