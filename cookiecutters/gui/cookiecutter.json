@@ -1,0 +1,10 @@
+{
+    "author": "Winnie Pooh",
+    "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
+    "artifact_id": "sample-gui",
+    "display_name": "Sample JavaFX Application",
+    "main_class_prefix": "Sample",
+    "version": "1.0.0-SNAPSHOT",
+    "short_description": "JavaFX stand-alone application that...",
+    "copyright_holder": "QBiC"
+}

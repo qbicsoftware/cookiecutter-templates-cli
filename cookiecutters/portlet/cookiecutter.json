@@ -1,0 +1,14 @@
+{
+    "author": "Winnie Pooh",
+    "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
+    "artifact_id": "sample-portlet",
+    "display_name": "Sample Portlet",
+    "version": "1.0.0-SNAPSHOT",
+    "short_description": "Vaadin Liferay portlet to...",
+    "copyright_holder": "QBiC",
+    "main_class_prefix": "Sample",
+    "use_openbis_client": ["no", "yes"],
+    "use_openbis_raw_api": ["no", "yes"],
+    "use_qbic_databases": ["no", "yes"],
+    "use_vaadin_charts": ["no", "yes"]
+}

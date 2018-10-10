@@ -15,8 +15,21 @@
 .DS_Store
  
 # Maven
-log/
 target/
 
 # Misc
-bin/
+**/bin
+.cookiecutter_working_folder/
+
+# Ignore these kind of files on all folders, some editors seem to be too eager and create
+# these files/folders
+**/.factorypath
+**/.classpath
+**/.project
+**/target
+
+# App logs should be ignored
+**/logs
+
+# Specific to this project
+generated/

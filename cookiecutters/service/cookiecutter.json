@@ -1,0 +1,10 @@
+{
+    "author": "Winnie Pooh",
+    "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
+    "artifact_id": "sample-service",
+    "display_name": "Sample Service",
+    "main_class_prefix": "Sample",
+    "version": "1.0.0-SNAPSHOT",
+    "short_description": "Service that...",
+    "copyright_holder": "QBiC"
+}

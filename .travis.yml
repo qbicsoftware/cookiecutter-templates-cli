@@ -1,32 +1,89 @@
 language: python
 python:
-  - "2.7"
-  - "3.6"
+  - "3.6"  
 sudo: false
+
 cache:
   directories:
     - "$HOME/.m2/repository"
     - "$HOME/.cache/pip"
+
+branches:
+  only:
+    - master
+    - development
+
+# we are using python, but we still need maven to test the generated projects
+addons:
+  apt:
+    packages:
+    - maven
+
+install: 
+  - pip install -U pip wheel
+  - pip install -r pip_requirements.txt
+
+env:
+  matrix:
+  - TYPE=cli           USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=generic-lib   USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portal-lib    USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=service       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=gui           USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=no    USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no   
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=no   USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=no   USE_QBIC_DATABASES=yes
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=no
+  - TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+  global:
+    - secure: "nM053GNRZmle7ecKsdQAygLP35vmU6Zh2MKl9ZRorhDX4SlED4t3swvDS/bXtTGM8QBxRqHcHduiZF7JarE4CfYy8lQoEG0rObS6ULL7DYeClsQpHkG4wtxF4P5YHjVBlAO8//uJqFTPhsdH2bI+ewUeAg/sYKUcOW8jmktY96XTQa7O97z2CJbzyWw7JIHyyTJ0YT4UwG0kyN3lfmzx7fKuO4LkjgDX8d8VSTByMpOSxChPCqGcc55beeIvRNUbaMOS5KLCgFqgbvfmvc1pNgvUbsY0BZA2P1br2p1u79wKmjt8Pw4uTB+vD1yCeNFfu6XTqO5iRRksFekpjyoibfOQgd/9qQ6PuPm5UD4AhpZ32NoN2qCOeXg0cCywyVNZbZQ4qEZNgNXjkzruzAPQDN3zYV7rI7sIyvAGIHgsYEvGJEpvykPKfdV1CbJA2I5EhbJWRwDe2VERq1+Ah4eo49oxXL/1SmCo77MCvbT2/Ai3CPaY+Mu1wyN6GbRagD492cW/xJjIGImsMGhlgOPkSKuIJ1hvw5gMGsut/cnYvAK8aciXBJh7I1md3bRaINagb+SB+POHD0f9n5yJDnd0y+i4yXZQ8GBYjLpaKU1XoKkzN8h4rPb+GxSIQbBaFPcE8ZXJEYPOKDTc6m4T1hbuA94AWSH13JGldcChBHXRwaU="
+
+# javafx
+before_script: if [ "$TYPE" = "gui" ]; then
+                  jdk_switcher use oraclejdk8;
+               fi;
+               if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
+                  echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
+               fi;
+
+script: rm -Rf template-test && 
+        ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&
+        pytest --cov=./ &&
+        mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
+
+matrix:
+  # we will use this job to generate the code coverage report, no need to execute it twice
+  exclude:
+    - python: "3.6"
+      # this value must match EXACTLY as defined, including whitespace between elements!
+      env: TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+
+jobs:
+  include:
+    - stage: "Code Coverage"
+      # generate only one code coverage report
+      python: "3.6"
+      env: TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
+      script: rm -Rf template-test && 
+              ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_CLIENT use_qbic_databases=$USE_QBIC_DATABASES &&
+              pytest --cov=./ &&
+              mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
+      after_success:
+        - codecov      
+
 notifications:
   email:
     on_success: never
     on_failure: never
-  slack:
-    rooms:
-      secure: Yu0zhliT3tT02vSAUwZWdbZkVf9U+T8A7RuGrsckW1JVkoeUePlcf11uko+NW7O7/1NL3aCb68EF3AaObZ6hO6sMuJozfnIa8xcvLM1IOeEHfcY3sWYYkYvMITkrSPUdtvX8dYc1uYXHcEl/WI49vjqi+cHlNYNOdTtVFXal8YrxkjIHrHv90PAyth8Swft8BHDNlqyxdi+yKHNgywOtbMR5GuSI/8O2xmyxTE3KJgxiMxb0XhfwkjGEBJIu+u7LpZVERfL2TNJ7gzyeSQadGzG+FtPp70/zXPByo1vHTZHp3iyYmYBtonl9By/uZ9yjVuXxD/L4+sjARaKbLjwELD8ErLdjMj+RuY30JTW2VExHpot0mCR5kOBawZCmGdvpRyMx38RB4DN976ulRRMGOW6Eq4cASrV0Ov4efmTbPXdfvLxLPL+GURkKC0oYN9KawbnZUzZMqUjG0fRRB7AUfJcLYxjwtBqQugl+Z61jjeLNneTEeNFd6NNZCoqcy8H4wkovv1VBo8xM9w7mQa5WBn7Z8TXbErxVhU7GTKhtNyqLElUMJc1lpXIonRge4NO645y/Ndf4Klm0NjBWp9caJQIBoM9cS6x2aKmw1RFDWGJaGyJBbgoF2Mi5WIphgnE2jStqMx60GXWWbncBLdocMSAXUDuCSScDHFVG93Dz9a8=
-    on_success: never
-    on_failure: always
-branches:
-  only:
-    - master
-install: 
-  - sudo apt-get -qq update
-  - sudo apt-get install maven
-  - pip install -U pip wheel
-  - pip install -r pip_requirements.txt
-script:
-  # we override the portlet_id variable; the tests in (test_template.py) depend on this value, so be careful when you change it
-  # we also create a portlet with both openbis and access to qbic databases
-  - cookiecutter --no-input . portlet_id=template-test use_openbis=yes use_qbic_databases=yes && pytest --cov=./ && mvn -X -e --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
-after_success:
-  - codecov
+  
