@@ -7,9 +7,9 @@
 	version="2.0">
 
 	<portlet>
-		<description>Portlet that tests database/openBIS connectivity, as well as showcasing logging.</description>
-		<portlet-name>everything-bagel-portlet</portlet-name>
-		<display-name>Sample Portlet</display-name>
+		<description>${project.description}</description>
+		<portlet-name>${project.artifactId}</portlet-name>
+		<display-name>${project.name}</display-name>
 
 		<portlet-class>com.vaadin.server.VaadinPortlet</portlet-class>
 
@@ -30,8 +30,8 @@
 
 
 		<portlet-info>
-			<title>Sample Portlet</title>
-			<short-title>Portlet that tests database/openBIS connectivity, as well as showcasing logging.</short-title>
+			<title>${project.name}</title>
+			<short-title>${project.description}</short-title>
 			<keywords>Vaadin 7, QBiC, Big Data, Bioinformatics</keywords>
 		</portlet-info>
 

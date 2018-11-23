@@ -1,6 +1,8 @@
 package life.qbic.portal.portlet;
 
 import java.sql.DriverManager;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -206,18 +208,21 @@ public class EverythingBagelPortlet extends QBiCPortletUI {
 
         final TextField username = new TextField("Username");
         final PasswordField password = new PasswordField("Password");
-        final TextField jdbcUrl = new TextField("Base JDBC URL (e.g., jdbc:mariadb://localhost:3306/db-name)");
+        final TextField driverClass = new TextField("Driver");
+        driverClass.setValue("com.mysql.jdbc.Driver");
+        final TextField jdbcUrl = new TextField("Base JDBC URL (e.g., jdbc:mysql://localhost:3306/db-name)");
         jdbcUrl.setWidth("500px");
-        jdbcUrl.setValue("jdbc:mariadb://");
+        jdbcUrl.setValue("jdbc:mysql://");
         final Button internalDatabaseTestButton = new Button("Test QBiC internal DB connection");
 
         internalDatabaseLayout.addComponent(username);
         internalDatabaseLayout.addComponent(password);
+        internalDatabaseLayout.addComponent(driverClass);
         internalDatabaseLayout.addComponent(jdbcUrl);
         internalDatabaseLayout.addComponent(internalDatabaseTestButton);
 
         internalDatabaseTestButton.addClickListener((Button.ClickListener) event -> {
-            if (isQBiCDatabaseWorking(username.getValue(), password.getValue(), jdbcUrl.getValue())) {
+            if (isQBiCDatabaseWorking(username.getValue(), password.getValue(), driverClass.getValue(), jdbcUrl.getValue())) {
                 Styles.notification("Everything Bagel Portlet", "Connection to QBiC database works!", NotificationType.SUCCESS); 
             } else {
                 Styles.notification("Everything Bagel Portlet", "Could not establish connection to QBiC database. Check the logs for exceptions.", NotificationType.ERROR); 
@@ -226,9 +231,14 @@ public class EverythingBagelPortlet extends QBiCPortletUI {
         layout.addComponent(internalDatabaseLayout);
     }
 
-    private boolean isQBiCDatabaseWorking(final String username, final String password, final String jdbcUrl) {
-        boolean success = false;
-        try (final Connection connection = DriverManager.getConnection(String.format("%s?user=%s&password=%s", jdbcUrl, username, password))) {
+    private boolean isQBiCDatabaseWorking(final String username, final String password, final String driverClass, final String jdbcUrl) {
+        try {
+            Class.forName(driverClass).newInstance();
+        } catch (Exception e) {
+            LOG.error("Could not load driver", e);
+            return false;
+        }
+        try (final Connection connection = DriverManager.getConnection(String.format("%s?user=%s&password=%s", jdbcUrl, URLEncoder.encode(username, "UTF-8"), URLEncoder.encode(password, "UTF-8")))) {
             final DatabaseMetaData metaData = connection.getMetaData();
             final ResultSet resultSet = metaData.getTables(connection.getCatalog(), null, "%", null);
 
@@ -237,12 +247,11 @@ public class EverythingBagelPortlet extends QBiCPortletUI {
             }
 
             resultSet.close();
-
-            success = true;
         } catch (Exception e) {
             LOG.error("Could not connect to QBiC database", e);
+            return false;
         }
-        return success;
+        return true;
 
     }
 

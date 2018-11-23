@@ -3,7 +3,7 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>everything-bagel-portlet</portlet-name>
+		<portlet-name>${project.artifactId}</portlet-name>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

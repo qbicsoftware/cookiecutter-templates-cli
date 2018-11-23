@@ -10,9 +10,9 @@
   		<param-value>true</param-value>
 	</context-param>
 
-	<display-name>Sample Portlet</display-name>
+	<display-name>${project.name}</display-name>
 	<servlet>
-		<servlet-name>everything-bagel-portlet</servlet-name>
+		<servlet-name>${project.artifactId}</servlet-name>
 		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
 
 		<init-param>
@@ -23,7 +23,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>everything-bagel-portlet</servlet-name>
+		<servlet-name>${project.artifactId}</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 </web-app>
