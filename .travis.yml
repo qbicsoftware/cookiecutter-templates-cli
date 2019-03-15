@@ -22,8 +22,9 @@ addons:
 install: 
   - pip install -U pip wheel
   - pip install -r pip_requirements.txt
+  - sudo add-apt-repository --yes ppa:openjdk-r/ppa && sudo apt update --yes && sudo apt install --yes openjdk-8-jdk
   - wget --output-document jdk_switcher.sh https://raw.githubusercontent.com/michaelklishin/jdk_switcher/master/jdk_switcher.sh && chmod +x jdk_switcher.sh && ./jdk_switcher.sh use openjdk8
-#  - sudo add-apt-repository --yes ppa:openjdk-r/ppa && sudo apt update --yes && sudo apt install --yes openjdk-8-jdk
+  - sudo update-alternatives --config java
 
 env:
   matrix:
@@ -59,7 +60,7 @@ before_script: if [ "$TYPE" = "gui" ]; then
                   echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
                fi;
 
-script: echo "JAVA_HOME=$JAVA_HOME" && sudo update-alternatives --config java && which java && java -version && rm -Rf template-test && 
+script: echo "JAVA_HOME=$JAVA_HOME" && which java && java -version && rm -Rf template-test && 
         ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&
         pytest --cov=./ &&
         mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
