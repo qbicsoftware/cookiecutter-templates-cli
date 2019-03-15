@@ -16,6 +16,7 @@
       - [Testing a portlet locally using Jetty](#testing-a-portlet-locally-using-jetty)
       - [Testing other tools locally](#testing-other-tools-locally)
     - [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
+    - [Secure your configuration files before pushing to Git](#secure-your-configuration-files-before-pushing-to-git)
     - [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
     - [Provide encrypted information to Travis CI](#provide-encrypted-information-to-travis-ci)
       - [Maven credentials](#maven-credentials)
@@ -114,7 +115,8 @@ donut-portlet/
     │   │   │       └── portlet
     │   │   │           └── AppWidgetSet.gwt.xml
     │   │   ├── log4j2.xml
-    │   │   └── portlet.properties
+    │   │   ├── portlet.properties
+    │   │   └── developer.properties 
     │   └── webapp
     │       ├── VAADIN
     │       │   └── themes
@@ -164,13 +166,6 @@ Similarly, we have configured the [Maven][maven] plug-ins to run integration tes
 
 ### Test your code locally
 You can easily run the unit and integration tests for libraries you have written by using the `mvn test` command. This is, more or less, what our build system does. Take a look at the `.travis.yml` file located in the `common-files` if you want to know all implementation details related to how we do continuous integration.
-
-### Secure your configuration files before pushing to Git
-It might happen that you accidentally pushed a file containing sensitive data. Well, :poop: happens. 
-
-The good part is that this is reversible and. The bad part is that, due to compliance with EU law, whenever one of these incidents occurs, the only way to do this right is to not only to [[delete all compromised files from the repository](https://help.github.com/en/articles/removing-sensitive-data-from-a-repository)]], but also to change all compromised passwords, which is a great way to ruin someone's day.
-
-So don't do it, but if you do, or if you discover such an incident, just know that this *sould* be reported.
 
 #### Testing a portlet locally using Jetty
 Go to the generated folder (i.e., `generated/donut-portlet` in our case) and run:
@@ -222,6 +217,13 @@ You now have a new QBiC project with all the required dependencies and configura
 Make sure to enable *Marketplace apps* in your repository:
 
 ![martetplace-app](images/marketplace-apps.png)
+
+### Secure your configuration files before pushing to Git
+It might happen that you accidentally pushed a file containing sensitive data. Well, :poop: happens. 
+
+The good part is that this is reversible. The bad part is that, due to compliance with EU law, whenever one of these incidents occurs, the only way to do this right is to not only to [delete all compromised files from the repository](https://help.github.com/en/articles/removing-sensitive-data-from-a-repository), but also to change all compromised passwords, which is a great way to ruin someone's day.
+
+So don't do it, but if you do, or if you discover such an incident, just know that this *sould* be reported.
 
 ### Check that everything worked in Travis-CI.com
 The generated `donut-portlet` folder contains a `.travis.yml` file that will help you integrate your GitHub repository with [Travis CI][travis], our continuous integration service. Broadly speaking, everytime you _push_ a change into your GitHub repository, [Travis CI][travis] will use the `.travis.yml` file to know what to do. 
