@@ -1,5 +1,5 @@
 language: java
-java: openjdk8
+jdk: openjdk8
 dist: xenial
 
 cache:
@@ -21,6 +21,7 @@ addons:
 
 install: 
   - wget --output-document Miniconda3-latest-Linux-x86_64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && chmod +x Miniconda3-latest-Linux-x86_64.sh && ./Miniconda3-latest-Linux-x86_64.sh -b -f
+  - $HOME/miniconda3/bin/conda update --yes -n base -c defaults conda
   - $HOME/miniconda3/bin/conda create --yes --channel conda-forge --name qbic-build cookiecutter python=3 pytest>=3.6 pytest-cov codecov
   - echo ". $HOME/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && source ~/.bashrc && conda activate qbic-build
 
