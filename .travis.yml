@@ -57,7 +57,7 @@ before_script: if [ "$TYPE" = "gui" ]; then
                   echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
                fi;
 
-script: rm -Rf template-test && 
+script: which java && java -version && rm -Rf template-test && 
         ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&
         pytest --cov=./ &&
         mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
