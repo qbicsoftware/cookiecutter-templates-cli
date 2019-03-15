@@ -22,7 +22,7 @@ addons:
 install: 
   - pip install -U pip wheel
   - pip install -r pip_requirements.txt
-  - wget –output-document jdk_switcher.sh https://raw.githubusercontent.com/michaelklishin/jdk_switcher/master/jdk_switcher.sh && chmod +x jdk_switcher.sh && ./jdk_switcher.sh use openjdk8
+  - wget --output-document jdk_switcher.sh https://raw.githubusercontent.com/michaelklishin/jdk_switcher/master/jdk_switcher.sh && chmod +x jdk_switcher.sh && ./jdk_switcher.sh use openjdk8
 #  - sudo add-apt-repository --yes ppa:openjdk-r/ppa && sudo apt update --yes && sudo apt install --yes openjdk-8-jdk
 
 env:
