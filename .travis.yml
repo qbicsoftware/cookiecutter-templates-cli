@@ -53,8 +53,7 @@ env:
 
 # javafx
 before_script: if [ "$TYPE" = "gui" ]; then
-                  wget --output-document jdk_switcher.sh https://raw.githubusercontent.com/michaelklishin/jdk_switcher/master/jdk_switcher.sh && chmod +x jdk_switcher.sh
-                  ./jdk_switcher.sh use oraclejdk8;
+                  wget --output-document jdk_switcher.sh https://raw.githubusercontent.com/michaelklishin/jdk_switcher/master/jdk_switcher.sh && chmod +x jdk_switcher.sh && ./jdk_switcher.sh use oraclejdk8;
                fi;
                if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
                   echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
