@@ -20,9 +20,9 @@ addons:
     - maven
 
 install: 
-  - wget --output-document Miniconda3-latest-Linux-x86_64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && chmod +x Miniconda3-latest-Linux-x86_64.sh && ./Miniconda3-latest-Linux-x86_64.sh -b -f && export PATH="$HOME/miniconda3/bin:$PATH"
-  - conda create --yes --channel conda-forge --name qbic-build cookiecutter python=3 pytest>=3.6 pytest-cov codecov
-  - conda activate qbic-build
+  - wget --output-document Miniconda3-latest-Linux-x86_64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && chmod +x Miniconda3-latest-Linux-x86_64.sh && ./Miniconda3-latest-Linux-x86_64.sh -b -f
+  - $HOME/miniconda3/bin/conda create --yes --channel conda-forge --name qbic-build cookiecutter python=3 pytest>=3.6 pytest-cov codecov
+  - echo ". $HOME/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && source ~/.bashrc && conda activate qbic-build
 
 env:
   matrix:
