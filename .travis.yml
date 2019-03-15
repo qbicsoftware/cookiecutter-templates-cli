@@ -53,7 +53,7 @@ env:
 
 # javafx
 before_script: if [ "$TYPE" = "gui" ]; then
-                  -/jdk_switcher.sh use oraclejdk8;
+                  jdk_switcher use oraclejdk8;
                fi;
                if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
                   echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
