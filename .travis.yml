@@ -21,7 +21,7 @@ addons:
 
 install: 
   - wget --output-document Miniconda3-latest-Linux-x86_64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && chmod +x Miniconda3-latest-Linux-x86_64.sh && ./Miniconda3-latest-Linux-x86_64.sh -b -f && export PATH="$HOME/miniconda3/bin:$PATH"
-  - conda create --channel conda-forge --name qbic-build cookiecutter python=3 pytest>=3.6 pytest-cov codecov
+  - conda create --yes --channel conda-forge --name qbic-build cookiecutter python=3 pytest>=3.6 pytest-cov codecov
   - conda activate qbic-build
 
 env:
