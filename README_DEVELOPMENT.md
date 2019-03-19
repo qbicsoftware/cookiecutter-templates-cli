@@ -162,7 +162,11 @@ We use [Cobertura](http://cobertura.github.io/cobertura/) to generate [coverage 
 mvn cobertura:cobertura
 ```
 
-Similarly, we have configured the [Maven][maven] plug-ins to run integration tests. These tests are also under the `src/test` folder, but their names must end with _*IntegrationTest_, such as `DonutPortletIntegrationTest`.
+Similarly, we have configured the [Maven][maven] plug-ins to run integration tests. These tests are also under the `src/test` folder, but their names must end with _*IntegrationTest_, such as `DonutPortletIntegrationTest`. Running integration tests can be a time-consuming task, so these are, usually, not executed alongside the unit tests. To execute the integration tests, invoke the following command:
+
+```bash
+mvn verify
+```
 
 ### Test your code locally
 You can easily run the unit and integration tests for libraries you have written by using the `mvn test` command. This is, more or less, what our build system does. Take a look at the `.travis.yml` file located in the `common-files` if you want to know all implementation details related to how we do continuous integration.
