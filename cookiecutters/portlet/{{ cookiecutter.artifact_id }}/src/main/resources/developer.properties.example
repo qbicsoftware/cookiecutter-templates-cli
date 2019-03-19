@@ -53,3 +53,6 @@ vocabulary.ms.labeling = ...
 
 # allow portlets to configure whether unauthenticated users can see content
 access.unauthenticated.sampleproperty = true
+
+# path of the yaml file containing statistics for statistics-portlet
+statistics.file.path = ...
