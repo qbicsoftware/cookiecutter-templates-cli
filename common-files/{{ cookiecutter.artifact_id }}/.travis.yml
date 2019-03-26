@@ -18,6 +18,7 @@ branches:
   only:
   - master
   - development
+  - /[0-9]*\.[0-9]*\.[0-9]*/ # adds release branches
 
 # added to make logs look cleaner, crisper, certified fresh
 before_install: unset _JAVA_OPTIONS 
@@ -31,6 +32,7 @@ before_script: if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
                fi;
 
 # as agreed in our SOP, build everything (don't deploy, just try to 'mvn install' locally, which covers all phases)
+# integration tests are disabled
 script: mvn --quiet --activate-profiles !development-build,!release-build --settings .travis.settings.xml clean cobertura:cobertura install -DskipITs
 # upload code coverage report, generate maven site (javadocs, documentation, static code analysis, etc.)
 after_success: 
@@ -44,7 +46,7 @@ deploy:
   # artifact will be installed in our testing instance if it is a .war file
 - skip_cleanup: true
   provider: script
-  script: mvn --quiet --activate-profiles development-build,!release-build --settings .travis.settings.xml deploy
+  script: mvn --quiet --activate-profiles development-build,!release-build --settings .travis.settings.xml deploy -DskipITs
   on:
     branch: development
     condition: '"$TRAVIS_EVENT_TYPE" = "push"'
@@ -53,10 +55,11 @@ deploy:
   # artifact will be installed in our testing instance if it is a .war file
 - skip_cleanup: true
   provider: script
-  script: mvn --quiet --activate-profiles !development-build,release-build --settings .travis.settings.xml deploy
+  script: mvn --quiet --activate-profiles !development-build,release-build --settings .travis.settings.xml deploy -DskipITs
   on:
     branch: master
     condition: '"$TRAVIS_EVENT_TYPE" = "push"'
+    tags: true
 
 # change according to your needs, but we recommend to deactivate email notifications
 # for now, we configured Travis to send a notification to the #travis-ci channel 
