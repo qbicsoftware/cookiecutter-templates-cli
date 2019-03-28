@@ -22,12 +22,14 @@ project = '{{ cookiecutter.display_name }}'
 copyright = '{% now 'utc', '%Y' %}, {{ cookiecutter.copyright_holder }}'
 author = '{{ cookiecutter.copyright_holder }}'
 
-# These two values are automatically replaced by a script later on
+# These two values are automatically replaced by a script during the build process
+# don't modify the content between the tags; this content is replaced using sed
+##########<DO NOT MODIFY>##########
 # The short X.Y version
 version = 'REPLACE_WITH_VERSION_FROM_POM_XML'
 # The full version, including alpha/beta/rc tags
 release = 'REPLACE_WITH_VERSION_FROM_POM_XML'
-
+##########</DO NOT MODIFY>##########
 
 # -- General configuration ---------------------------------------------------
 

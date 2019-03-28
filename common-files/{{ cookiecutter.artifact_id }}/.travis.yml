@@ -57,6 +57,13 @@ deploy:
   on:
     condition: '"$TRAVIS_EVENT_TYPE" = "push"'
     tags: true
+  # generate documentation for all builds, for now
+- skip_cleanup: true
+  provider: script
+  script: bash .publish-docs.sh
+  on:
+    condition: '"$TRAVIS_EVENT_TYPE" = "push"'
+    all_branches: true
 
 # change according to your needs, but we recommend to deactivate email notifications
 # for now, we configured Travis to send a notification to the #travis-ci Slack channel 
