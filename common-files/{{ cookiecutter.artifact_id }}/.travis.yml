@@ -18,6 +18,8 @@ branches:
   only:
   - master
   - development
+  # Travis treats pushed tags as branches
+  - /^[vV]?\d+\.\d+\.\d+$/ # matches e.g., v1.2.3, 1.2.3, V1.2.3
 
 # added to make logs look cleaner, crisper, certified fresh
 before_install: unset _JAVA_OPTIONS 
@@ -30,8 +32,7 @@ before_script: if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
                   echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
                fi;
 
-# as agreed in our SOP, build everything (don't deploy, just try to 'mvn install' locally, which covers all phases)
-# integration tests are disabled
+# as agreed in our SOP, build everything (don't deploy, just try to 'mvn package' locally, which covers unit tests)
 script: mvn --quiet --activate-profiles !development-build,!release-build --settings .travis.settings.xml clean cobertura:cobertura package
 # upload code coverage report, generate maven site (javadocs, documentation, static code analysis, etc.)
 after_success: 
@@ -41,25 +42,24 @@ after_success:
 deploy:
   # as agreed in our SOP, builds on development branch will deploy to our maven repository after validating
   # the artifact has a proper SNAPSHOT version
-  # artifact will be installed in our testing instance if it is a .war file
+  # make sure to skip integration tests! (using -DskipITs)
 - skip_cleanup: true
   provider: script
   script: mvn --quiet --activate-profiles development-build,!release-build --settings .travis.settings.xml deploy -DskipITs
   on:
     branch: development
     condition: '"$TRAVIS_EVENT_TYPE" = "push"'
-  # as agreed in our SOP, tagging a commit on the master branch will upload to our maven repository
-  # after validating the artifact has a proper release version
-  # artifact will be installed in our testing instance if it is a .war file
+  # as agreed in our SOP, releases are performed by tagging commits,
+  # the version string and version of dependencies are validated (no snapshots allowed)
 - skip_cleanup: true
   provider: script
   script: mvn --quiet --activate-profiles !development-build,release-build --settings .travis.settings.xml deploy -DskipITs
   on:
-    branch: master
     condition: '"$TRAVIS_EVENT_TYPE" = "push"'
+    tags: true
 
 # change according to your needs, but we recommend to deactivate email notifications
-# for now, we configured Travis to send a notification to the #travis-ci channel 
+# for now, we configured Travis to send a notification to the #travis-ci Slack channel 
 notifications:
   email:
     on_success: never
