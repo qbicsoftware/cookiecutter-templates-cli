@@ -2,20 +2,20 @@
 [![Build Status](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli.svg?branch=development)](https://travis-ci.com/qbicsoftware/cookiecutter-templates-cli)[![Code Coverage](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/qbicsoftware/cookiecutter-templates-cli)
 
 ## Table of contents
-  * [Motivation](#motivation)
-  * [Available templates](#available-templates)
-  * [Structure of this repository](#structure-of-this-repository)
-  * [Requirements](#requirements)
-    + [Conda](#conda)
-  * [Making sure it all went fine](#making-sure-it-all-went-fine)
-  * [Usage](#usage)
-    + [Generating a new project](#generating-a-new-project)
-    + [How to change default values](#how-to-change-default-values)
-      - [1. Providing defaults using a `.cookiecutterrc` file](#1-providing-defaults-using-a--cookiecutterrc--file)
-      - [2. Providing defaults via the command-line](#2-providing-defaults-via-the-command-line)
-    + [Avoid using prompts](#avoid-using-prompts)
-    + [Location of generated code](#location-of-generated-code)
-    + [Change output folder](#change-output-folder)
+  - [Motivation](#motivation)
+- [Available templates](#available-templates)
+- [Structure of this repository](#structure-of-this-repository)
+- [Requirements](#requirements)
+  * [Conda](#conda)
+- [Making sure it all went fine](#making-sure-it-all-went-fine)
+- [Usage](#usage)
+  * [Generating a new project](#generating-a-new-project)
+  * [How to change default values](#how-to-change-default-values)
+    + [1. Providing defaults using a file](#1-providing-defaults-using-a-file)
+    + [2. Providing defaults via the command-line](#2-providing-defaults-via-the-command-line)
+  * [Avoid using prompts](#avoid-using-prompts)
+  * [Location of generated code](#location-of-generated-code)
+  * [Change output folder](#change-output-folder)
 
 ## Motivation
 There is a lot of boilerplate code associated to building Vaadin portlets for Liferay portals, so it makes sense to automate their creation by using templates. 
@@ -148,7 +148,7 @@ Values shown between brackets are the defaults. To use the default value (as Hom
 ### How to change default values
 There are two recommended ways to change default values without having to edit those pesky `cookiecutter.json` files. Of course, you can edit `cookiecutter.json` files, but that's not the most elegant solution.
 
-#### 1. Providing defaults using a `.cookiecutterrc` file
+#### 1. Providing defaults using a file
 After repeatedly using this tool, you will surely become annoyed at the fact that you have to type your name and your email address over and over, even though they haven't changed in the last couple of years. 
 
 Luckily, [Cookiecutter offers a global configuration file](http://cookiecutter.readthedocs.io/en/latest/advanced/user_config.html). Create a file named `.cookiecutterrc` in your home folder (this varies across operating systems) and include your *global defaults* in it as shown here:
