@@ -21,7 +21,7 @@ addons:
 
 
 install: 
-  - ( $HOME/miniconda3/bin/conda --version && $HOME/miniconda3/bin/conda activate qbic-build ) || ./.install-conda.sh
+  - $HOME/miniconda3/bin/conda --version || ./.install-conda.sh
 
 env:
   matrix:
