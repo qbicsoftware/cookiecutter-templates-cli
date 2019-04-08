@@ -19,8 +19,9 @@ addons:
     packages:
     - maven
 
+
 install: 
-  - - $HOME/miniconda3/bin/conda --version || ./.install-reports-dependencies.sh
+  - ( $HOME/miniconda3/bin/conda --version && $HOME/miniconda3/bin/conda activate qbic-build ) || ./.install-conda.sh
 
 env:
   matrix:
