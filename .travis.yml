@@ -20,10 +20,7 @@ addons:
     - maven
 
 install: 
-  - wget --output-document Miniconda3-latest-Linux-x86_64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && chmod +x Miniconda3-latest-Linux-x86_64.sh && ./Miniconda3-latest-Linux-x86_64.sh -b -f
-  - $HOME/miniconda3/bin/conda update --yes -n base -c defaults conda
-  - $HOME/miniconda3/bin/conda create --yes --channel conda-forge --name qbic-build cookiecutter python=3 pytest>=3.6 pytest-cov codecov
-  - echo ". $HOME/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && source ~/.bashrc && conda activate qbic-build
+  - - $HOME/miniconda3/bin/conda --version || ./.install-reports-dependencies.sh
 
 env:
   matrix:
@@ -58,9 +55,9 @@ before_script: if [ "$TYPE" = "gui" ]; then
                if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
                   echo "$VAADIN_CHARTS_LICENSE_CODE" > ~/.vaadin.charts.developer.license;
                fi;
-               echo "JAVA_HOME=$JAVA_HOME" && which java && java -version
+               echo "JAVA_HOME=$JAVA_HOME" && which java && java -version               
 
-script: rm -Rf template-test && 
+script: echo ". $HOME/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && source ~/.bashrc && conda activate qbic-build && rm -Rf template-test && 
         ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_RAW_API use_qbic_databases=$USE_QBIC_DATABASES &&
         pytest --cov=./ &&
         mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
@@ -78,7 +75,7 @@ jobs:
       # generate only one code coverage report
       jdk: openjdk8
       env: TYPE=portlet       USE_VAADIN_CHARTS=yes   USE_OPENBIS_RAW_API=yes  USE_OPENBIS_CLIENT=yes  USE_QBIC_DATABASES=yes
-      script: rm -Rf template-test && 
+      script: echo ". $HOME/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && source ~/.bashrc && conda activate qbic-build && rm -Rf template-test && 
               ./generate.py --no-input --output-dir . --type=$TYPE artifact_id=template-test use_vaadin_charts=$USE_VAADIN_CHARTS use_openbis_client=$USE_OPENBIS_CLIENT use_openbis_raw_api=$USE_OPENBIS_CLIENT use_qbic_databases=$USE_QBIC_DATABASES &&
               pytest --cov=./ &&
               mvn --file template-test/pom.xml --settings template-test/.travis.settings.xml cobertura:cobertura
