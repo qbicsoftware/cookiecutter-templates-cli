@@ -1,29 +1,31 @@
 # Unofficial development guide
 
 ## Table of contents
-  - [Required tools for Java development](#required-tools-for-java-development)
-    - [1. Java](#1-java)
-    - [2. Maven](#2-maven)
-    - [3. Other tools](#3-other-tools)
-  - [Template variables](#template-variables)
-    - [Global variables](#global-variables)
-    - [Variables that apply for portlets, command-line tools, services and JavaFX stand-alone applications](#variables-that-apply-for-portlets-command-line-tools-services-and-javafx-stand-alone-applications)
-    - [Variables that apply only for portlets](#variables-that-apply-only-for-portlets)
-  - [Layout of the generated projects](#layout-of-the-generated-projects)
-  - [What to do once you've generated your project?](#what-to-do-once-youve-generated-your-project)
-    - [Write tests, check code coverage](#write-tests-check-code-coverage)
-    - [Test your code locally](#test-your-code-locally)
-      - [Testing a portlet locally using Jetty](#testing-a-portlet-locally-using-jetty)
-      - [Testing other tools locally](#testing-other-tools-locally)
-    - [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
-    - [Secure your configuration files before pushing to Git](#secure-your-configuration-files-before-pushing-to-git)
-    - [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
-    - [Provide encrypted information to Travis CI](#provide-encrypted-information-to-travis-ci)
-      - [Maven credentials](#maven-credentials)
-      - [Using Vaadin Charts add-on in your portlet](#using-vaadin-charts-add-on-in-your-portlet)
-    - [Publish your first version](#publish-your-first-version)
-    - [Change default branch](#change-default-branch)
-    - [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci-optional)
+- [Required tools for Java development](#required-tools-for-java-development)
+  * [1. Java](#1-java)
+  * [2. Maven](#2-maven)
+  * [3. Other tools](#3-other-tools)
+- [Template variables](#template-variables)
+  * [Global variables](#global-variables)
+  * [Variables that apply for portlets, command-line tools, services and JavaFX stand-alone applications](#variables-that-apply-for-portlets--command-line-tools--services-and-javafx-stand-alone-applications)
+  * [Variables that apply only for portlets](#variables-that-apply-only-for-portlets)
+- [Layout of the generated projects](#layout-of-the-generated-projects)
+- [What to do once you've generated your project?](#what-to-do-once-you-ve-generated-your-project-)
+  * [Write tests, check code coverage](#write-tests--check-code-coverage)
+  * [Test your code locally](#test-your-code-locally)
+    + [Testing a portlet locally using Jetty](#testing-a-portlet-locally-using-jetty)
+    + [Testing other tools locally](#testing-other-tools-locally)
+  * [Create a new GitHub repository for your new project](#create-a-new-github-repository-for-your-new-project)
+  * [Secure your configuration files before pushing to Git](#secure-your-configuration-files-before-pushing-to-git)
+  * [Check that everything worked in Travis-CI.com](#check-that-everything-worked-in-travis-cicom)
+  * [Report generation using Maven](#report-generation-using-maven)
+  * [Provide encrypted information to Travis CI](#provide-encrypted-information-to-travis-ci)
+    + [Maven credentials](#maven-credentials)
+    + [GitHub personal access token for automatic report publishing](#github-personal-access-token-for-automatic-report-publishing)
+    + [Using Vaadin Charts add-on in your portlet](#using-vaadin-charts-add-on-in-your-portlet)
+  * [Publish your first version](#publish-your-first-version)
+  * [Change default branch](#change-default-branch)
+  * [Getting slack notifications from Travis CI (optional)](#getting-slack-notifications-from-travis-ci--optional-)
 
 ## Required tools for Java development
 ### 1. Java
@@ -247,6 +249,12 @@ If you see the settings page, then it means that everything went fine. Make sure
 
 ![travis-repo-settings](images/travis-repo-settings.png)
 
+### Report generation using Maven
+We generate reports using [the Maven site plugin](https://maven.apache.org/plugins/maven-site-plugin/). The goal `site` will output several reports which you can then find in the `target/site` directory. So, in other words, running `mvn site` will populate the `target/site` folder with all configured reports, as defined in [our parent POMs][parent-poms]. 
+
+Reports are generated in HTML format, so you can access them in your browser by entering `file://<full-path-to-your-local-repo>/target/site/index.html` (e.g., `file:///home/homer/donut-portlet/target/site/index.html`; <sub>shh... no that's not a typo, that's three forward slashes, remember that full paths start with `/`</sub>) in your browser's address bar. If you don't like the [beautiful](images/dashing.jpg) format  you can [configure the site descriptor](https://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html). 
+
+
 ### Provide encrypted information to Travis CI
 Any person on the internet can download [Maven][maven] artifacts from our [public Maven repository](https://qbic-repo.am10.uni-tuebingen.de). But in order to upload artifacts to our repository, you will need proper authentication. 
 
@@ -270,6 +278,24 @@ travis encrypt "MAVEN_REPO_PASSWORD=<password>" --add env.global --pro
 ```
 
 Ask the people who wrote this guide about the proper values of `<username>` and `<password>`. Encrypted values in [Travis CI][travis] are bound to their GitHub repository, so you cannot simply copy them from other repositories.
+
+#### GitHub personal access token for automatic report publishing
+When a project is built on [Travis CI][travis], reports are generated and uploaded to a special git branch. This all happens in `.travis.yml` and `.generate-reports.py` automatically.
+
+GitHub offers [free hosting for projects](https://pages.github.com/). We take advantage of this feature and have configured our builds to upload generated reports. In fact, all automatically generated reports are committed to the `gh-pages` branch of your repository and they are available to the public.
+
+You will need to create a GitHub personal access token [as explained here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). Your personal access token will be encrypted and you can delete it anytime without having to change your password. Make sure that you are granting full repo access over private repositories, as shown here:
+
+![access-token](images/access-token.png)
+
+Once you have your personal access token, add it to your `.travis.yml` script by running:
+
+```bash
+travis encrypt "REPORTS_GITHUB_ACCESS_TOKEN=<token>" --add env.global --pro
+```
+
+As a side note, we also have [a daily build](https://travis-ci.com/qbicsoftware/docs/settings) that creates [this summary](https://qbicsoftware.github.io/docs/). The [docs repository](https://github.com/qbicsoftware/docs) contains a couple of scripts that generate the report of reports.
+
 
 #### Using Vaadin Charts add-on in your portlet
 This add-on requires you to have a proper license code. If your portlet requires this add-on, add the `VADIN_CHARTS_LICENSE_CODE` as an encrypted variable in `.travis.yml`:
@@ -314,3 +340,4 @@ Where `<token>` can be obtained by clicking on the "Edit configuration" icon (it
 [travis-qbic]: https://travis-ci.com/profile/qbicsoftware
 [travis-console]: https://github.com/travis-ci/travis.rb
 [conda]: https://conda.io/docs/
+[parent-poms]: https://github.com/qbicsoftware/parent-poms
