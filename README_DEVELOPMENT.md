@@ -256,6 +256,14 @@ travis encrypt "MAVEN_REPO_USERNAME=<username>" --add env.global --pro
 travis encrypt "MAVEN_REPO_PASSWORD=<password>" --add env.global --pro
 ```
 
+Be careful! This will only work for travis-ci.org. For travis-ci.com you need to call the CLI with the `--com` option flag (Travis platform madness!):
+
+```bash
+travis encrypt --com "MAVEN_REPO_USERNAME=<username>" --add env.global --pro
+travis encrypt --com "MAVEN_REPO_PASSWORD=<password>" --add env.global --pro
+```
+You need to login (i.e. your Github credentials).
+
 Ask the people who wrote this guide about the proper values of `<username>` and `<password>`. Encrypted values in [Travis CI][travis] are bound to their GitHub repository, so you cannot simply copy them from other repositories.
 
 #### Using Vaadin Charts add-on in your portlet
