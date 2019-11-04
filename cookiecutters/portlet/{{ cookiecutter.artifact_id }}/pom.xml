@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>life.qbic</groupId>
 		<artifactId>portlet-parent-pom</artifactId>
-		<version>1.4.0</version>
+		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<groupId>life.qbic</groupId>
 	<artifactId>{{ cookiecutter.artifact_id }}</artifactId>
@@ -49,12 +49,12 @@
 		<dependency>
 			<groupId>life.qbic</groupId>
 			<artifactId>portal-utils-lib</artifactId>
-			<version>1.4.0</version>
+			<version>1.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>life.qbic</groupId>
 			<artifactId>core-utils-lib</artifactId>
-			<version>1.0.0</version>
+			<version>1.2.1</version>
 		</dependency>
 		{% if cookiecutter.use_openbis_client == "yes" %}		
 		<!-- openBIS client -->
@@ -67,10 +67,10 @@
 		{% if cookiecutter.use_openbis_raw_api == "yes" %}		
 		<!-- openBIS API -->
 		<dependency>
-        		<groupId>life.qbic.openbis</groupId>
-            		<artifactId>openbis_api</artifactId>
-			<version>3-S253.0</version>
-        	</dependency>
+        	<groupId>life.qbic.openbis</groupId>
+            <artifactId>openbis-api</artifactId>
+			<version>18.06.1</version>
+        </dependency>
 		{% endif %}
 		{% if cookiecutter.use_qbic_databases == "yes" %}
 		<!-- Access to our custom databases (portlets use direct JDBC to access data for now),
