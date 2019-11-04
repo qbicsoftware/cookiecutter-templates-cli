@@ -27,6 +27,19 @@ public class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
         
         // TODO: generate content for your portlet
         //       this method returns any non-null layout to avoid a NullPointerException later on
-        return new HorizontalLayout();
+        final VerticalLayout layout = new VerticalLayout();
+
+        final TextField name = new TextField();
+        name.setCaption("Type your name here:");
+
+        Button button = new Button("Click Me");
+        button.addClickListener(e -> {
+        layout.addComponent(new Label("Thanks " + name.getValue()
+        + ", it works!"));
+        });
+
+        layout.addComponents(name, button);
+
+        return layout;
     }    
 }
