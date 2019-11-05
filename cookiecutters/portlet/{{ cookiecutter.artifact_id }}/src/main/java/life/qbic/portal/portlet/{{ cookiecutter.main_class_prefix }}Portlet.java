@@ -3,8 +3,7 @@ package life.qbic.portal.portlet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +23,10 @@ public class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
     @Override
     protected Layout getPortletContent(final VaadinRequest request) {
         LOG.info("Generating content for {}", {{ cookiecutter.main_class_prefix }}Portlet.class);
-        
+
+        // Verify that Groovy Code works
+        final SampleClass sampleClass = new SampleClass();
+
         // TODO: generate content for your portlet
         //       this method returns any non-null layout to avoid a NullPointerException later on
         final VerticalLayout layout = new VerticalLayout();
@@ -34,8 +36,8 @@ public class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
 
         Button button = new Button("Click Me");
         button.addClickListener(e -> {
-        layout.addComponent(new Label("Thanks " + name.getValue()
-        + ", it works!"));
+            layout.addComponent(new Label("Thanks " + name.getValue()
+            + ", it works!"));
         });
 
         layout.addComponents(name, button);
