@@ -3,6 +3,6 @@
 
 <display>
 	<category name="QBiC Portlets">
-		<portlet id="everything-bagel-portlet" />
+		<portlet id="${project.artifactId}" />
 	</category>
 </display>

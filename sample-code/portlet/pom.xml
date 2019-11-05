@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>life.qbic</groupId>
 		<artifactId>portlet-parent-pom</artifactId>
-		<version>1.3.0</version>
+		<version>1.4.0</version>
 	</parent>
 	<groupId>life.qbic</groupId>
 	<artifactId>everything-bagel-portlet</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>Sample Portlet</name>
+	<name>Everything Bagel Portlet</name>
 	<url>http://github.com/qbicsoftware/everything-bagel-portlet</url>
 	<description>Portlet that tests database/openBIS connectivity, as well as showcasing logging.</description>
 	<packaging>war</packaging>
