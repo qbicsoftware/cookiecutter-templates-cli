@@ -45,6 +45,7 @@ class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
         + ", it works!"))
         })
         layout.addComponents(name, button)
+        return layout
     }    
 }
 
