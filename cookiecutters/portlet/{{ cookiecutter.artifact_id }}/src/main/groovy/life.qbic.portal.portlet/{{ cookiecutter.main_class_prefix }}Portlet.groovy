@@ -25,7 +25,7 @@ class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
 
     @Override
     protected Layout getPortletContent(final VaadinRequest request) {
-        log.info"Generating content for {}", SamplePortlet.class
+        log.info"Generating content for {}"
 
         // Verify that Groovy Code works
         def sampleClass = new SampleClass()
